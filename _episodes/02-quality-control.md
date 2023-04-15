@@ -505,7 +505,7 @@ $ mkdir -p ~/Desktop/fastqc_html
 {: .bash}
 
 Now we can transfer our HTML files to our local computer using `scp`.
-
+THIS IS FOR DC CARPENTRY AWS
 ~~~
 $ scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
 ~~~
@@ -587,11 +587,11 @@ We have now looked at quite a few "Per base sequence quality" FastQC graphs, but
 
 ## Working with the FastQC text output
 
-Now that we have looked at our HTML reports to get a feel for the data,
+~~Now that we have looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
 in your terminal program that is connected to your AWS instance
 (the tab label will start with `dcuser@ip`) and make sure you are in
-our results subdirectory.   
+our results subdirectory~~
 
 ~~~
 $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
