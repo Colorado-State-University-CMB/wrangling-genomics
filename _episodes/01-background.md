@@ -1,7 +1,7 @@
 ---
 title: "Background and Metadata"
-teaching: 10
-exercises: 5
+teaching: 10? 
+exercises: 5? 
 questions:
 - "What data are we using?"
 - "Why is this experiment important?"
