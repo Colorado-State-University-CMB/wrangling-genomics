@@ -60,3 +60,11 @@ There are two ways to connect and use the Alpine system. One is through OnDemand
 
 ### OnDemand Walkthrough
 
+## Super computing concepts 
+
+### Submitting jobs
+
+A cluster computer is more complicated than just logging on to a super machine. 
+It allows us to distribute our computational workload across nodes and CPUs. 
+
+That means that all the computationally heavy work must be done in a script that is passed to a job scheduler called SLURM-the system will then distribute the work to its 10s of thousands of resources using configuration variables added to the script. 
