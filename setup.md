@@ -62,12 +62,20 @@ There are two ways to connect and use the Alpine system. One is through OnDemand
 
 ## Setting up your account 
 
+### First terminal experience 
+
+Open an Alpine_shell and do the following **unless you're already setup with conda on Alpine**
+
+For users who are already set up with conda, you can look at the script to see what it does. 
+
 ```
 cd /projects/$USER
-git clone repo url
-cd repo/10_alpine
+git clone https://github.com/Colorado-State-University-CMB/CM580A3-Intro-to-qCMB-2023 
+cd CM580A3-Intro-to-qCMB-2023/10_alpine
 bash setup.sh
 ```
+
+This script configures conda for you and adds slurm aliases that make things easier. 
 
 ## Super computing concepts 
 
