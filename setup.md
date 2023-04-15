@@ -10,7 +10,7 @@ use the workshop materials, see the
 
 This workshop is adapted to work on [CURC Alpine](https://curc.readthedocs.io/en/latest/clusters/alpine/index.html) for the graduate class CM580A3 at Colorado State University. All instructions that follow apply specifically to CSU users, and were determined in April of 2023. Some of the details may change with system administration changes.
 
-## getting an account for CSU users
+## Getting an account for CSU users
 
 You must have a valid CSU NetID and Duo two-factor authentication enabled to apply for an account on Alpine through CSU.
 
@@ -27,5 +27,10 @@ OR
 [Request form for an account on the system](https://it.colostate.edu/research-computing-and-cyberinfrastructure/compute/get-started-with-alpine/)
 
 Follow the instructions starting at **You will then be asked to provide information about your account.** (right above the screenshot).
+
+
+You should receive an immediate, open ticket confirmation from rc-help@colostate.edu.  The account will created by the system administrator and **you'll be notified by a second email.**
+
+## Logging on once your account is created
 
 
