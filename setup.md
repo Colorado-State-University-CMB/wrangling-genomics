@@ -60,6 +60,15 @@ There are two ways to connect and use the Alpine system. One is through OnDemand
 
 ### OnDemand Walkthrough
 
+## Setting up your account 
+
+```
+cd /projects/$USER
+git clone repo url
+cd repo/10_alpine
+bash setup.sh
+```
+
 ## Super computing concepts 
 
 ### Submitting jobs
