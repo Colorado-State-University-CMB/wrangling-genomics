@@ -53,7 +53,7 @@ Once receiving that notification, you can log in to the system
 
 There are two ways to connect and use the Alpine system. One is through OnDemand (described below) and the other is a direct ssh from your computer.
 
- 1. https://ondemand-rmacc.rc.colorado.edu/
+ 1. (https://ondemand-rmacc.rc.colorado.edu)[https://ondemand-rmacc.rc.colorado.edu]
     - operates through tabs in web browser
     - can remember password, duo authentication 
     - graphical file browser, with upload/download options
@@ -68,7 +68,7 @@ There are two ways to connect and use the Alpine system. One is through OnDemand
 
 ### OnDemand Walkthrough
 
-Follow the link https://ondemand-rmacc.rc.colorado.edu. It should look similar to the image below:
+Follow the link to https://ondemand-rmacc.rc.colorado.edu (click here)[https://ondemand-rmacc.rc.colorado.edu]. It should look similar to the image below:
 
 #### Get there
 
@@ -109,7 +109,12 @@ Open a new tab in your browser by going to Clusters-&gt;Alpine_shell
 
 ## Setting up your account 
 
+We want to:
+ 1. Download course material using command line `git`
+ 2. Use the conda installer (requires special setup steps)
+ 3. Set up your directory structure in the /projects directory since it has more space (250Gb)
 
+I have put a setup script in the repo.
 
 ### Setup script 
 
@@ -119,13 +124,14 @@ Open an Alpine_shell and do the following
 ```
 cd /projects/$USER
 git clone https://github.com/Colorado-State-University-CMB/CM580A3-Intro-to-qCMB-2023 
-cd CM580A3-Intro-to-qCMB-2023/10_alpine
+cd CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC
 ```
 
 **New users do this**
 
 ```
-bash setup.sh
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC
+bash CM580A3_Alpine_setup.sh
 ```
 
 The script does the following:
