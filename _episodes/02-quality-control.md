@@ -55,7 +55,7 @@ It will take about 15 minutes to download the files.
 Here we are using the `-p` option for `mkdir`. This option allows `mkdir` to create the new directory, even if one of the parent directories does not already exist. It also supresses errors if the directory already exists, without overwriting that directory. 
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC
 
 mkdir -p 01_input/untrimmed_fastq/
 mkdir -p 02_scripts
@@ -516,7 +516,7 @@ Here, we see positions within the read in which the boxes span a much wider rang
 We will now assess the quality of the reads that we downloaded. First, make sure you are still in the `untrimmed_fastq` directory
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC
 
 $ cd 01_input/untrimmed_fastq/
 ~~~
@@ -561,7 +561,7 @@ generated output. You may find a different
  organization suits you better, but we will use this:
 
 ```
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC
 mkdir 01_input
 mkdir 02_scripts
 mkdir 03_output
@@ -585,7 +585,7 @@ To begin writing our script, go to
 02_scripts. 
 
 ```
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC
 cd 02_scripts
 ```
 
