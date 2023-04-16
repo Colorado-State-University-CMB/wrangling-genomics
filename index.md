@@ -34,5 +34,5 @@ use a variety of bioinformatic tools with confidence and greatly enhance your re
 > AMI. Information on setting up an AMI and accessing the required data is provided on the [Genomics Workshop setup page](http://www.datacarpentry.org/genomics-workshop/setup.html).~~
 >
 > We're using Alpine instead (see setup) 
-
+>
 {: .prereq}
