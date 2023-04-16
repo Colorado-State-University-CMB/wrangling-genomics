@@ -117,29 +117,42 @@ Open an Alpine_shell and do the following
 **unless you're already set up with conda
  on Alpine**
 
-For users who are already set up with 
-conda, you can look at the script to see
- what it does. 
+The script does the following:
 
+ 1. Configures your `.condarc` to download packages into your /projects space
+ 2. Configures your `.condarc` to add the "bioconda" channel (this is where bioinformatics programs come from)
+ 3. Configures your `.bashrc` to read commands from a special file which:
+    1. Sources the system conda
+    2. Adds aliases `sa` and `sq` to check slurm jobs
+
+
+For users who are already set up with 
+conda, you can look at the script to see if you need/want to incorporate any of these
+actions.
+
+
+**Whole class do this**
 ```
 cd /projects/$USER
 git clone https://github.com/Colorado-State-University-CMB/CM580A3-Intro-to-qCMB-2023 
 cd CM580A3-Intro-to-qCMB-2023/10_alpine
+```
+
+**New users do this**
+```
 bash setup.sh
 ```
 
-This script configures conda for you and
- adds slurm aliases that make things 
-easier. It also adds the following line 
-to your `.bashrc` in order to activate conda 
-when you open a shell. 
+Then open a new Alpine_shell from the dashboard. Your prompt should start with the word `(base)`.
+
+
+**Previous users** if your conda is not activated by default, add the following to your .bashrc if you want
+to activate it when you log in:
 
 `source /curc/sw/anaconda3/latest`
 
-This line makes conda available, and 
-activates a default environment called "base". 
-The word `(base)` is prepended to your prompt
-to indicate which environment is active. 
+
+*We'll stop here to see what happened to everyone.*
 
 ## Supercomputing concepts 
 
