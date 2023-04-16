@@ -216,6 +216,27 @@ programs, we have to have qc-trim activated first.
 conda create env -n vcf bwa samtools bcftools
 ```
 
-Exercise : activate the environment and test
- that the software was installed.
+> ## Exercise 
+> 
+> Activate the environment we just created 
+and test that the software was installed.
 
+> 
+>> ## Solution
+>> 
+>> ~~~
+>> conda activate vcf
+>> bwa
+>> samtools 
+>> bcftools
+>> ~~~
+>> {: .bash}
+>> 
+>> The name of the environment is what 
+>> we specified with the -n argument 
+>> during `conda create`. Whereas the names 
+>> of the programs were listed next. 
+>> We check that they're installed by typing them
+>> one at a time, each their own command without arguments. 
+> {: .solution}
+{: .challenge}
