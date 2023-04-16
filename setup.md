@@ -92,7 +92,7 @@ activates a default environment called "base".
 The word `(base)` is prepended to your prompt
 to indicate which environment is active. 
 
-## Super computing concepts 
+## Supercomputing concepts 
 
 ### Submitting jobs
 
@@ -210,7 +210,7 @@ them.
 **Important** whenever we want to call these 
 programs, we have to have qc-trim activated first. 
 
-### alignment and variant calling
+### Alignment and variant calling
 
 ```
 conda create env -n vcf bwa samtools bcftools
