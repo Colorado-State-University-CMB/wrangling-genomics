@@ -87,7 +87,7 @@ nano Downloader.sbatch
 ~~~
 {: .bash}
 
-Breakdown of the above command:
+Breakdown of the above script header:
 
 |Code|Description|
 |----|-----------|
@@ -102,6 +102,7 @@ Breakdown of the above command:
 Complete the script by pasting these lines at the end. That's all for now, ***but do not run yet!***
 
 ~~~
+cd ../01_input/untrimmed_fastq
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq.gz
@@ -110,6 +111,69 @@ curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fa
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz
 ~~~
 {: .bash}
+
+Make sure you save and quit (CTRL-X)
+
+Remember we said we have to use a lot of ".." paths to keep our files straight? here we did that with the first `cd`.
+
+
+### Submitting the script and checking its status
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine/02_scripts
+sbatch Downloader.sbatch
+~~~
+{: .bash}
+
+You will get a job ID if the submission was successful.
+
+#### Using the aliases from the setup script
+
+|Alias|Command|Description|
+|-----|-------|-----------|
+|sq|squeue -u $USER|squeue gives you a report of what you have running and what is waiting in the job queue|
+|sa|sacct -X --format JobID,JobName,AllocCPUS,State,ExitCode,Elapsed,TimeLimit,Submit,Start,End|sacct is a job report|
+
+Unless your job failed to submit, or completed before you check it, `sq` will show it in the queue.
+~~~
+sq
+~~~
+{: .bash}
+
+Mine waited in the queue for a long time:
+~~~
+(base) [dcking@colostate.edu@login-ci1 10_Alpine_HPC]$ sbatch Downloader.sbatch 
+Submitted batch job 1129890
+(base) [dcking@colostate.edu@login-ci1 10_Alpine_HPC]$ sq -i 1
+Sun Apr 16 14:47:35 2023
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           1129890    amilan download dcking@c PD       0:00      1 (Priority)
+~~~
+{: .bash}
+
+Regardless of the job status, `sa` will show the submitted jobs for the last day.
+~~~
+sa
+~~~
+{: .bash}
+
+If your job is waiting in the queue, you can "watch" its status by running squeue every 2 seconds with:
+
+~~~
+sq -i 2
+~~~
+{: .bash}
+
+Once the job is running, the log file will be created and updated as it goes along.
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine/02_scripts
+ls
+~~~
+{: .bash}
+
+
+
 
 # Quality control
 
