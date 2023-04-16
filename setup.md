@@ -75,7 +75,18 @@ cd CM580A3-Intro-to-qCMB-2023/10_alpine
 bash setup.sh
 ```
 
-This script configures conda for you and adds slurm aliases that make things easier. 
+This script configures conda for you and
+ adds slurm aliases that make things 
+easier. It also adds the following line 
+to your `.bashrc` in order to activate conda 
+when you open a shell. 
+
+`source /curc/sw/anaconda3/latest`
+
+This line makes conda available, and 
+activates a default environment called "base". 
+The word `(base)` is prepended to your prompt
+to indicate which environment is active. 
 
 ## Super computing concepts 
 
