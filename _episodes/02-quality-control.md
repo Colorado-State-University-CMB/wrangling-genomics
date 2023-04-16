@@ -45,47 +45,69 @@ We are studying a population of *Escherichia coli* (designated Ara-3), which wer
 
 The data are paired-end, so we will download two files for each sample. We will use the [European Nucleotide Archive](https://www.ebi.ac.uk/ena) to get our data. The ENA "provides a comprehensive record of the world's nucleotide sequencing information, covering raw sequencing data, sequence assembly information and functional annotation." The ENA also provides sequencing data in the fastq format, an important format for sequencing reads that we will be learning about today.
 
-To download the data, run the commands below.
+We will:
+ 1. Create a subdirectory in 01_input
+ 2. Create a script directory
+ 3. Write a download script
 
+It will take about 15 minutes to download the files.
 
 Here we are using the `-p` option for `mkdir`. This option allows `mkdir` to create the new directory, even if one of the parent directories does not already exist. It also supresses errors if the directory already exists, without overwriting that directory. 
 
-
-It will take about 15 minutes to download the files.
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
 
 mkdir -p 01_input/untrimmed_fastq/
-cd 01_input/untrimmed_fastq
+mkdir -p 02_scripts
+cd 02_scripts
+~~~
+{: .bash}
 
+## WE WILL NOW CREATE AND RUN OUR FIRST BATCH SCRIPT
+
+It is not always necessary to download data as its own job, but we'll do so
+to practice our scripting.
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine/02_scripts
+nano Downloader.sbatch
+~~~
+{: .bash}
+
+**Start your script with the following lines**
+
+~~~
+#!/usr/bin/env bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --time=0:20:00
+#SBATCH --partition=amilan
+#SBATCH --qos=normal
+#SBATCH --job-name=download-fastq
+~~~
+{: .bash}
+
+Breakdown of the above command:
+
+|Code|Description|
+|----|-----------|
+|#!/usr/bin/env bash| Called `shebang`. It tells the system what kind of script this is.|
+|#SBATCH --nodes=1| We request one node.|
+|#SBATCH --ntasks=1| We request one CPU.|
+|#SBATCH --time=0:20:00| We request 20 minutes, 5 more than the lesson said would be required. |
+|#SBATCH --partition=amilan| An Alpine-specific parameter for a standard job. |
+|#SBATCH --qos=normal|Quality Of Service- normal|
+|#SBATCH --job-name=download-fastq|The log file will start with this job name.|
+
+Complete the script by pasting these lines at the end. That's all for now, ***but do not run yet!***
+
+~~~
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq.gz
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq.gz
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz
-~~~
-{: .bash}
-
-> ## Faster option
->
-> If your workshop is short on time or the venue's internet connection is weak or unstable, learners can
-> avoid needing to download the data and instead use the data files provided in the `.backup/` directory.
->
-> ~~~
-> $ cp ~/.backup/untrimmed_fastq/*fastq.gz .
-> ~~~
-> {: .bash}
->
-> This command creates a copy of each of the files in the `.backup/untrimmed_fastq/` directory that end in `fastq.gz` and
-> places the copies in the current working directory (signified by `.`).
-{: .callout}
-
-
-The data comes in a compressed format, which is why there is a `.gz` at the end of the file names. This makes it faster to transfer, and allows it to take up less space on our computer. Let's unzip one of the files so that we can look at the fastq format.
-
-~~~
-$ gunzip SRR2584863_1.fastq.gz
 ~~~
 {: .bash}
 
