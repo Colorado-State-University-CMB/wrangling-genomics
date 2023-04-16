@@ -194,7 +194,7 @@ Sun Apr 16 14:47:35 2023
 ~~~
 {: .ouput}
 
-It turned out that sacct and squeue were not working properly, so...
+BUT, it turned out that sacct and squeue were not working properly, so...
 
 Use the Jobs->Active Jobs tab in the on-demand interface.
 
@@ -614,11 +614,20 @@ This time, we are going to use more than one CPU. We'll use a ***special variabl
 
 mkdir -p ../03_output/fastqc_untrimmed_reads
 
-fastqc -o ../03_output/fastqc_untrimmed_reads -t $SLURM_NTASKS ../01_input/untrimmed_fastq/\*.fastq
+fastqc -o ../03_output/fastqc_untrimmed_reads -t $SLURM_NTASKS ../01_input/untrimmed_fastq/*.fastq
 
 ~~~
 {: .bash}
 
+~~~
+sbatch fastqc.sbatch
+~~~
+{: .bash}
+
+~~~
+Submitted job 1234567
+~~~
+{: .output}
 
 The log file will continually update with the 
 progress of the analysis. It will start like this:
@@ -638,7 +647,7 @@ Approx 45% complete for SRR2584863_1.fastq
 {: .output}
 
 In total, it should take about five minutes for FastQC to run on all
-six of our FASTQ files. When the analysis completes, your prompt
+six of our FASTQ files (or *will* it?????). When the analysis completes, your prompt
 will return. So your screen will look something like this:
 
 ~~~
@@ -652,7 +661,8 @@ $
 {: .output}
 
 ---
-STOP HERE
+STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE
+STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE
 
 The FastQC program has created several new files within our
 `data/untrimmed_fastq/` directory.
