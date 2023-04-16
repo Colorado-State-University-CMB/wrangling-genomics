@@ -240,3 +240,6 @@ and test that the software was installed.
 >> one at a time, each their own command without arguments. 
 > {: .solution}
 {: .challenge}
+
+
+You may now *leave acompile* by typing `exit`
