@@ -93,3 +93,18 @@ sbatch scriptname.sh
 # as opposed to 
 bash scriptname.sh
 ```
+
+... where scriptname.sh contains
+ special commented lines that configure 
+the job resources. 
+They look like
+
+```
+#SBATCH --ntasks=4
+#SBATCH --nodes=1
+#SBATCH --time=1:00:00
+```
+
+The previous "sbatch" headers request
+ 4 CPUs on one node, for 1 hour.
+
