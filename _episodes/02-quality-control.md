@@ -94,21 +94,26 @@ Breakdown of the above script header:
 |#!/usr/bin/env bash| Called `shebang`. It tells the system what kind of script this is.|
 |#SBATCH --nodes=1| We request one node.|
 |#SBATCH --ntasks=1| We request one CPU.|
-|#SBATCH --time=0:20:00| We request 20 minutes, 5 more than the lesson said would be required. |
+|#SBATCH --time=0:10:00| Actually only 5 minutes the way we're going to do it. |
 |#SBATCH --partition=amilan| An Alpine-specific parameter for a standard job. |
 |#SBATCH --qos=normal|Quality Of Service- normal|
-|#SBATCH --job-name=download-fastq|The log file will start with this job name.|
+|#SBATCH --job-name=download-fastq|This name will appear in some reports|
 
 Complete the script by pasting these lines at the end. That's all for now, ***but do not run yet!***
 
+Note: the original instructions downloaded from EBI, but the connection was no longer working.
+These files are served courtesy of the Osborne Nishimura Lab:
+
 ~~~
 cd ../01_input/untrimmed_fastq
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz
+curl -O http://129.82.125.224:34/CM580A3/10_Alpine_HPC/SRR2589044/SRR2589044_1.fastq.gz
+curl -O http://129.82.125.224:34/CM580A3/10_Alpine_HPC/SRR2589044/SRR2589044_2.fastq.gz
+curl -O http://129.82.125.224:34/CM580A3/10_Alpine_HPC/SRR2584863/SRR2584863_1.fastq.gz
+curl -O http://129.82.125.224:34/CM580A3/10_Alpine_HPC/SRR2584863/SRR2584863_2.fastq.gz
+curl -O http://129.82.125.224:34/CM580A3/10_Alpine_HPC/SRR2584866/SRR2584866_1.fastq.gz
+curl -O http://129.82.125.224:34/CM580A3/10_Alpine_HPC/SRR2584866/SRR2584866_2.fastq.gz
+
+gunzip *.gz
 ~~~
 {: .bash}
 
@@ -140,7 +145,7 @@ sq
 ~~~
 {: .bash}
 
-Mine waited in the queue for a long time:
+Mine appeared to wait in the queue for a long time:
 ~~~
 (base) [dcking@colostate.edu@login-ci1 10_Alpine_HPC]$ sbatch Downloader.sbatch 
 Submitted batch job 1129890
@@ -151,28 +156,50 @@ Sun Apr 16 14:47:35 2023
 ~~~
 {: .bash}
 
-Regardless of the job status, `sa` will show the submitted jobs for the last day.
-~~~
-sa
-~~~
-{: .bash}
+It turned out to not be working...
 
-If your job is waiting in the queue, you can "watch" its status by running squeue every 2 seconds with:
+Use the Jobs->Active Jobs tab in the on-demand interface.
 
-~~~
-sq -i 2
-~~~
-{: .bash}
 
-Once the job is running, the log file will be created and updated as it goes along.
+Once the job is running, the log file will be created and updated as it goes along. My job's number was 1130135,
+so my log file was slurm-1130135.out.
 
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine/02_scripts
-ls
+(base) [dcking@colostate.edu@login13 02_scripts]$ ls
+Downloader.sbatch  slurm-1130135.out
 ~~~
 {: .bash}
 
 
+Let's look at the log file using `cat`:
+
+~~~
+(base) [dcking@colostate.edu@login13 02_scripts]$ cat slurm-1130135.out 
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  123M  100  123M    0     0  82.1M      0  0:00:01  0:00:01 --:--:-- 82.1M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  127M  100  127M    0     0  98.8M      0  0:00:01  0:00:01 --:--:-- 98.8M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  174M  100  174M    0     0  5158k      0  0:00:34  0:00:34 --:--:-- 5135k
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  182M  100  182M    0     0  5467k      0  0:00:34  0:00:34 --:--:-- 5493k
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  308M  100  308M    0     0  97.5M      0  0:00:03  0:00:03 --:--:-- 97.5M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  295M  100  295M    0     0   108M      0  0:00:02  0:00:02 --:--:--  108M
+~~~
+{: .bash}
+
+
+***Breakout rooms to see where everyone's at***
+---
 
 
 # Quality control
