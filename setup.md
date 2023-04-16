@@ -1,6 +1,14 @@
 ---
 layout: page
 title: Setup
+questions:
+- "Connecting to Alpine"
+- "Install software"
+- "Running programs through batch (sbatch)"
+objectives:
+- "Get an account, connect using ondemand"
+- "Use acompile to install software with conda"
+- "Preview SBATCH headers and script"
 ---
 
 ~~This workshop is designed to be run on pre-imaged Amazon Web Services 
