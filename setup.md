@@ -126,6 +126,8 @@ All "SBATCH" headers go beneath a line
  called shebang, and must come before 
 the commands of the script. 
 
+Example batch script:
+
 ```
 #!/usr/bin/env bash
 #SBATCH --ntasks=4
@@ -146,7 +148,7 @@ to download and compile source code.
 Therefore, a special job is started in
 order to isolate resources.
 
-Initiate the compile session:
+**Step 1** Initiate the compile session:
 
 ```
 acompile --ntasks=4
@@ -164,6 +166,9 @@ different environments in order to
 better use class time. Normally, all programs
 are installed into a single environment.
 
+**Step 2** Create a conda environment 
+for `fastq` and `trimmomatic` called `qc-trim` 
+
 ```
 conda create env -n qc-trim fastq trimmomatic
 ```
@@ -180,3 +185,27 @@ will ask if you want to proceed.
 Hit **enter** to proceed with downloading
  and installation.
 
+Once it is finished, **activate the environment**
+
+**Step 3** activate the environment and confirm
+ the programs are installed. 
+
+```
+conda activate qc-trim
+```
+
+Run fastqc without arguments
+```
+fastqc
+```
+Run trimmomatic without arguments
+```
+trimmomatic
+```
+
+We'll look at those help messages in depth
+later. We are only verifying that we have
+them.
+
+**Important** whenever we want to call these 
+programs, we have to have qc-trim activated first. 
