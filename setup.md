@@ -104,6 +104,9 @@ Open a new tab in your browser by going to Clusters-&gt;Alpine_shell
 
 ![ondemand Alpine shell](img/ondemand-alpine-shell.png)
 
+
+![ondemand Open Alpine shell](img/ondemand-open-alpine-shell.png)
+
 ## Setting up your account 
 
 
