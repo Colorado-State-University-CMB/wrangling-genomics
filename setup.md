@@ -154,6 +154,8 @@ to activate it when you log in:
 
 *We'll stop here to see what happened to everyone.*
 
+---
+
 ## Supercomputing concepts 
 
 ### Submitting jobs
