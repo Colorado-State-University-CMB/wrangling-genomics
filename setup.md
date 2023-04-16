@@ -216,7 +216,7 @@ programs, we have to have qc-trim activated first.
 conda create env -n vcf bwa samtools bcftools
 ```
 
-> ## Exercise 
+> ## Challenge
 > 
 > Activate the environment we just created 
 and test that the software was installed.
