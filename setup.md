@@ -53,7 +53,7 @@ Once receiving that notification, you can log in to the system
 
 There are two ways to connect and use the Alpine system. One is through OnDemand (described below) and the other is a direct ssh from your computer.
 
- 1. (https://ondemand-rmacc.rc.colorado.edu)[https://ondemand-rmacc.rc.colorado.edu]
+ 1. [https://ondemand-rmacc.rc.colorado.edu](https://ondemand-rmacc.rc.colorado.edu)
     - operates through tabs in web browser
     - can remember password, duo authentication 
     - graphical file browser, with upload/download options
@@ -68,7 +68,7 @@ There are two ways to connect and use the Alpine system. One is through OnDemand
 
 ### OnDemand Walkthrough
 
-Follow the link to https://ondemand-rmacc.rc.colorado.edu (click here)[https://ondemand-rmacc.rc.colorado.edu]. It should look similar to the image below:
+Follow the link to https://ondemand-rmacc.rc.colorado.edu [click here](https://ondemand-rmacc.rc.colorado.edu). It should look similar to the image below:
 
 #### Get there
 
