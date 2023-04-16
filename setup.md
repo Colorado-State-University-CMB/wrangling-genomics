@@ -62,11 +62,15 @@ There are two ways to connect and use the Alpine system. One is through OnDemand
 
 ## Setting up your account 
 
-### First terminal experience 
+### Setup script 
 
-Open an Alpine_shell and do the following **unless you're already setup with conda on Alpine**
+Open an Alpine_shell and do the following 
+**unless you're already set up with conda
+ on Alpine**
 
-For users who are already set up with conda, you can look at the script to see what it does. 
+For users who are already set up with 
+conda, you can look at the script to see
+ what it does. 
 
 ```
 cd /projects/$USER
@@ -132,4 +136,47 @@ Command1
 
 Command2
 ```
+
+### Installing software
+
+Installing software can 
+require a lot of time in order
+to download and compile source code.
+
+Therefore, a special job is started in
+order to isolate resources.
+
+Initiate the compile session:
+
+```
+acompile --ntasks=4
+```
+
+You may have to wait for a few seconds.
+ When it is ready, your prompt will
+ return to you, but the host name will
+be different.
+
+### Building environments for the variant calling workflow
+
+We will install programs into a few 
+different environments in order to
+better use class time. Normally, all programs
+are installed into a single environment.
+
+```
+conda create env -n qc-trim fastq trimmomatic
+```
+
+This message is OK: **frozen solve failed**
+
+The installation tries different "solves",
+ but there is only an issue if the command quits.
+
+After this step, conda will have figured
+out what the requested programs need, and
+will ask if you want to proceed.
+
+Hit **enter** to proceed with downloading
+ and installation.
 
