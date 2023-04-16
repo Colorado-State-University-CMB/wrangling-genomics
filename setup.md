@@ -241,5 +241,7 @@ and test that the software was installed.
 > {: .solution}
 {: .challenge}
 
+## Quit the `acompile` session
+
 
 You may now *leave acompile* by typing `exit`
