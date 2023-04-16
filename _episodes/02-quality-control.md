@@ -311,16 +311,6 @@ BUGS
 ~~~
 {: .bash}
 
-if fastqc is not installed then you would expect to see an error like
-
-~~~
-$ fastqc -h
-The program 'fastqc' is currently not installed. You can install it by typing:
-sudo apt-get install fastqc
-~~~
-
-If this happens check with your instructor before trying to install it.
-
 
 ## Assessing quality using FastQC
 In real life, you will not be assessing the quality of your reads by visually inspecting your 
@@ -461,9 +451,10 @@ will move these
 output files into a new directory within our `results/` directory.
 
 ~~~
-$ mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
-$ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
-$ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
+mkdir -p 03_output/fastqc_untrimmed_reads
+mv *.zip 03_output/fastqc_untrimmed_reads/
+mv *.html 03_output/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
@@ -471,7 +462,7 @@ Now we can navigate into this results directory and do some closer
 inspection of our output files.
 
 ~~~
-$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+cd 03_output/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
@@ -481,11 +472,11 @@ $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
 If we were working on our local computers, we would be able to look at 
 each of these HTML files by opening them in a web browser.
 
-However, these files are currently sitting on our remote AWS 
+~~However, these files are currently sitting on our remote AWS 
 instance, where our local computer can not see them.
 And, since we are only logging into the AWS instance via the 
 command line - it does not have any web browser setup to display 
-these files either.
+these files either.~~
 
 So the easiest way to look at these webpage summary reports will be
 to transfer them to our local computers (i.e. your laptop).
