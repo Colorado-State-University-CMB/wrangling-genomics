@@ -114,8 +114,19 @@ Open a new tab in your browser by going to Clusters-&gt;Alpine_shell
 ### Setup script 
 
 Open an Alpine_shell and do the following 
-**unless you're already set up with conda
- on Alpine**
+
+**Whole class do this**
+```
+cd /projects/$USER
+git clone https://github.com/Colorado-State-University-CMB/CM580A3-Intro-to-qCMB-2023 
+cd CM580A3-Intro-to-qCMB-2023/10_alpine
+```
+
+**New users do this**
+
+```
+bash setup.sh
+```
 
 The script does the following:
 
@@ -126,24 +137,14 @@ The script does the following:
     2. Adds aliases `sa` and `sq` to check slurm jobs
 
 
-For users who are already set up with 
-conda, you can look at the script to see if you need/want to incorporate any of these
+For users who are already set up with conda, you can look 
+at the script to see if you need/want to incorporate any of these
 actions.
 
 
-**Whole class do this**
-```
-cd /projects/$USER
-git clone https://github.com/Colorado-State-University-CMB/CM580A3-Intro-to-qCMB-2023 
-cd CM580A3-Intro-to-qCMB-2023/10_alpine
-```
+**Once you have run the script**
 
-**New users do this**
-```
-bash setup.sh
-```
-
-Then open a new Alpine_shell from the dashboard. Your prompt should start with the word `(base)`.
+then open a new Alpine_shell from the dashboard. Your prompt should start with the word `(base)`.
 
 
 **Previous users** if your conda is not activated by default, add the following to your .bashrc if you want
