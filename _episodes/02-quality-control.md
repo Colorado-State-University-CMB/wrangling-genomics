@@ -159,16 +159,13 @@ You will get a job ID if the submission was successful.
 
 #### Using the aliases from the setup script
 
+The aliases were not working for me properly yesterday (Alpine is in growing pains). See 
+Jobs->Active Jobs tab in the on-demand interface for a report that does appear to be working.
+
 |Alias|Command|Description|
 |-----|-------|-----------|
 |sq|squeue -u $USER|squeue gives you a report of what you have running and what is waiting in the job queue|
 |sa|sacct -X --format JobID,JobName,AllocCPUS,State,ExitCode,Elapsed,TimeLimit,Submit,Start,End|sacct is a job report|
-
-Unless your job failed to submit, or completed before you check it, `sq` will show it in the queue.
-~~~
-sq
-~~~
-{: .bash}
 
 
 ~~~
@@ -273,7 +270,7 @@ the first four lines.
 
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
-cd  ../01_input
+cd  ../01_input/untrimmed_fastq
 head -n 4 SRR2584863_1.fastq
 ~~~
 {: .bash}
@@ -357,7 +354,9 @@ very poor (`#` = a quality score of 2).
 > {: .solution}
 {: .challenge}
 
-At this point, lets validate that all the relevant tools are installed. If you are using the AWS AMI then these _should_ be preinstalled.
+At this point, lets validate that all the relevant tools are installed. Remember how we set up the conda environments?
+
+Activate your conda environment for fastqc in order to access the program. `conda activate qc-trim`
 
 ~~~
 $ fastqc -h
@@ -558,19 +557,24 @@ your directory structure for a workflow.
 The following organization conveniently
 separates input files from scripts, and 
 generated output. You may find a different
- organization suits you better, but we will use this:
+ organization suits you better, but we have set it up into 01_intput, 02_scripts, 03_output.
 
-```
+Verify that your directory structure looks right:
+
+~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC
-mkdir 01_input
-mkdir 02_scripts
-mkdir 03_output
-```
+ls
+~~~
+{: .bash}
 
-We will keep our scripts in 02_scripts,
-and for convenience, we will run them in 
-that directory. 
-So care must be taken to make sure the pathnames
+~~~
+01_input  02_scripts  03_output  CM580A3_Alpine_setup.sh  README.md
+~~~
+{: .output}
+
+Above, 01_input, 02_scripts, and 03_output are directories created with `mkdir`.
+
+As with the download script, care must be taken to make sure the pathnames
 are specified properly. 
 
 For example, if we are inside 02_scripts, 
@@ -589,18 +593,34 @@ To begin writing our script, go to
 cd 02_scripts
 ```
 
-FastQC can accept multiple file names 
-as input, and on both zipped and
- unzipped files, so we can use the 
-\*.fastq* wildcard to run FastQC on all
- of the FASTQ files in this directory.
+Create a new file called fastqc.sbatch. You can use `nano` in the terminal, or create it with the ondemand file browser.
+
+This time, we are going to use more than one CPU. We'll use a ***special variable*** called `$SLURM_NTASKS` to make use of it in the script.
 
 ~~~
-$ fastqc *.fastq*
+#!/usr/bin/env bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --time=0:20:00
+#SBATCH --partition=amilan
+#SBATCH --qos=normal
+#SBATCH --job-name=fastqc
+
+# uncomment below if you uncommented "conda activate qc-trim", but conda was not found
+# source /curc/sw/anaconda3/latest
+
+# uncomment below if qc-trim is not loaded in the job
+# conda activate qc-trim
+
+mkdir -p ../03_output/fastqc_untrimmed_reads
+
+fastqc -o ../03_output/fastqc_untrimmed_reads -t $SLURM_NTASKS ../01_input/untrimmed_fastq/\*.fastq
+
 ~~~
 {: .bash}
 
-You will see an automatically updating output message telling you the
+
+The log file will continually update with the 
 progress of the analysis. It will start like this:
 
 ~~~
@@ -630,6 +650,9 @@ Analysis complete for SRR2589044_2.fastq.gz
 $
 ~~~
 {: .output}
+
+---
+STOP HERE
 
 The FastQC program has created several new files within our
 `data/untrimmed_fastq/` directory.
