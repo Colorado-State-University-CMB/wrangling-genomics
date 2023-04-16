@@ -179,7 +179,7 @@ All "SBATCH" headers go beneath a line
  called shebang, and must come before 
 the commands of the script. 
 
-Example batch script:
+**TEMPLATE BATCH SCRIPT**
 
 ```
 #!/usr/bin/env bash
