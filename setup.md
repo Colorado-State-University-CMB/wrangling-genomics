@@ -68,6 +68,10 @@ There are two ways to connect and use the Alpine system. One is through OnDemand
 
 ### OnDemand Walkthrough
 
+Follow the link (https://ondemand-rmacc.rc.colorado.edu)[https://ondemand-rmacc.rc.colorado.edu]. It should look similar to the image below:
+
+![img/ondemand-rmacc.rc.colorado.png]
+
 ## Setting up your account 
 
 ### Setup script 
