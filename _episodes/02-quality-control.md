@@ -108,15 +108,21 @@ These files are served courtesy of the Osborne Nishimura Lab.
 > ## Exercise
 >
 >  Open the script in ondemand's visual editor.
+>
 > You should be able to find Downloader.sbatch in the Dashboard File browser under the /projects/youreid@colostate.edu section.
+>
 > Once you find it, look for an option to open the file to edit it.
 >
 >> ## Solution
 >>
 >> Once navigating to your `/projects` file listing, click CM580A3-Intro-to-qCMB-2023, 
+>>
 >> then click 10_Alpine_HPC
+>>
 >> then click 02_scripts
+>>
 >> Between the Name and Size of the file is a clickable box with 3 dots, in there is an option to edit the file.
+>>
 >> It will open in a new tab with a text editor.
 > {: .solution}
 {: .challenge}

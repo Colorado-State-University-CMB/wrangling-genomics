@@ -28,20 +28,6 @@ Alpine is the University of Colorado Boulder Research Computing’s third-genera
 
 [readthedocs on Alpine](https://curc.readthedocs.io/en/latest/clusters/alpine/index.html)
 
-## Two ways to log on
-
- 1. https://ondemand-rmacc.rc.colorado.edu/
-    - operates through tabs in web browser
-    - can remember password, duo authentication 
-    - graphical file browser, with upload/download options
-    - file editor and terminal windows
- 2. ssh from your terminal
-    - `ssh -l eid@colostate.edu rc.colorado.edu`
-    - sometimes it works better
-    - sometimes it's the only way to get on the system
-    - command line only
-    - need password,push DUO every time 
-
 ## Directory organization and space
 
  - home directory: /home/$USER - 5Gb
