@@ -59,6 +59,7 @@ Here we are using the `-p` option for `mkdir`. This option allows `mkdir` to cre
 
 mkdir -p 01_input/untrimmed_fastq/
 mkdir -p 02_scripts
+mkdir -p 03_output
 cd 02_scripts
 ~~~
 {: .bash}
@@ -69,7 +70,7 @@ It is not always necessary to download data as its own job, but we'll do so
 to practice our scripting.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine/02_scripts
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
 nano Downloader.sbatch
 ~~~
 {: .bash}
@@ -102,7 +103,25 @@ Breakdown of the above script header:
 Complete the script by pasting these lines at the end. That's all for now, ***but do not run yet!***
 
 Note: the original instructions downloaded from EBI, but the connection was no longer working.
-These files are served courtesy of the Osborne Nishimura Lab:
+These files are served courtesy of the Osborne Nishimura Lab.
+
+> ## Exercise
+>
+>  Open the script in ondemand's visual editor.
+> You should be able to find Downloader.sbatch in the Dashboard File browser under the /projects/youreid@colostate.edu section.
+> Once you find it, look for an option to open the file to edit it.
+>
+>> ## Solution
+>>
+>> Once navigating to your `/projects` file listing, click CM580A3-Intro-to-qCMB-2023, 
+>> then click 10_Alpine_HPC
+>> then click 02_scripts
+>> Between the Name and Size of the file is a clickable box with 3 dots, in there is an option to edit the file.
+>> It will open in a new tab with a text editor.
+> {: .solution}
+{: .challenge}
+
+Add the following to your script:
 
 ~~~
 cd ../01_input/untrimmed_fastq
@@ -119,13 +138,13 @@ gunzip *.gz
 
 Make sure you save and quit (CTRL-X)
 
-Remember we said we have to use a lot of ".." paths to keep our files straight? here we did that with the first `cd`.
+We will make use of relative paths, including the parent directory  ".." to keep our file organization straight. Here we did that with the first `cd`.
 
 
 ### Submitting the script and checking its status
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine/02_scripts
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
 sbatch Downloader.sbatch
 ~~~
 {: .bash}
@@ -145,18 +164,34 @@ sq
 ~~~
 {: .bash}
 
-Mine appeared to wait in the queue for a long time:
+
 ~~~
-(base) [dcking@colostate.edu@login-ci1 10_Alpine_HPC]$ sbatch Downloader.sbatch 
+sbatch Downloader.sbatch 
+~~~
+{: .bash}
+
+~~~
 Submitted batch job 1129890
-(base) [dcking@colostate.edu@login-ci1 10_Alpine_HPC]$ sq -i 1
+~~~
+{: .output}
+
+
+Mine *seemed* to wait in the queue for a long time:
+
+
+~~~
+sq
+~~~
+{: .bash}
+
+~~~
 Sun Apr 16 14:47:35 2023
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            1129890    amilan download dcking@c PD       0:00      1 (Priority)
 ~~~
-{: .bash}
+{: .ouput}
 
-It turned out to not be working...
+It turned out that sacct and squeue were not working properly, so...
 
 Use the Jobs->Active Jobs tab in the on-demand interface.
 
@@ -165,17 +200,25 @@ Once the job is running, the log file will be created and updated as it goes alo
 so my log file was slurm-1130135.out.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine/02_scripts
-(base) [dcking@colostate.edu@login13 02_scripts]$ ls
-Downloader.sbatch  slurm-1130135.out
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+ls
 ~~~
 {: .bash}
 
+~~~
+Downloader.sbatch  slurm-1130135.out
+~~~
+{: .output}
 
-Let's look at the log file using `cat`:
+
+Let's look at the log file using `cat` (your job number will be different from mine):
 
 ~~~
-(base) [dcking@colostate.edu@login13 02_scripts]$ cat slurm-1130135.out 
+cat slurm-1130135.out 
+~~~
+{: .bash}
+
+~~~
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  123M  100  123M    0     0  82.1M      0  0:00:01  0:00:01 --:--:-- 82.1M
@@ -195,10 +238,9 @@ Let's look at the log file using `cat`:
                                  Dload  Upload   Total   Spent    Left  Speed
 100  295M  100  295M    0     0   108M      0  0:00:02  0:00:02 --:--:--  108M
 ~~~
-{: .bash}
+{: .output}
 
 
-***Breakout rooms to see where everyone's at***
 ---
 
 
@@ -224,7 +266,9 @@ We can view the first complete read in one of the files our dataset by using `he
 the first four lines.
 
 ~~~
-$ head -n 4 SRR2584863_1.fastq
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+cd  ../01_input
+head -n 4 SRR2584863_1.fastq
 ~~~
 {: .bash}
 
@@ -611,7 +655,7 @@ will move these
 output files into a new directory within our `results/` directory.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine/03_output/ 
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/ 
 mkdir fastqc_untrimmed_reads
 mv *.zip fastqc_untrimmed_reads/
 mv *.html fastqc_untrimmed_reads/
