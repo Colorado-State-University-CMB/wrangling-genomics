@@ -70,9 +70,43 @@ There are two ways to connect and use the Alpine system. One is through OnDemand
 
 Follow the link (https://ondemand-rmacc.rc.colorado.edu)[https://ondemand-rmacc.rc.colorado.edu]. It should look similar to the image below:
 
+#### Get there
+
 ![ondemand-front-page](img/ondemand-rmacc.rc.colorado.png)
 
+#### File browser
+
+Click "Files" to see the main directories you have access to.
+
+![ondemand file browser](img/ondemand-filebrowser.png)
+
+Clicking on "Home Directory" loads a view of the home directory.
+
+![ondemand open file browser](img/ondemand-open-filebrowser.png)
+
+**NOTE** your home directory allows only 5Gb.
+
+Click on the directory starting with `/projects/youreid@colostate.edu` to load that directory into your file browser. 
+
+This has 250Gb and is permanent storage. We will install programs 
+here and do most of our work here. If it is too large, or temporary
+then we can use the directory starting with /scratch alpine.
+
+Click on the directory starting with `/scratch/alpine/youreid@colostate.edu` to load that directory into your file browser. 
+This directory has 1Tb of space available to you. It is deleted after 90 days, however, so you 
+must have a data plan to compress it, or allow it to be deleted.
+
+The directory starting with `/pl` is a larger allocation of space that your lab can buy into.
+
+#### Shell window
+
+Open a new tab in your browser by going to Clusters-&gt;Alpine_shell
+
+![ondemand Alpine shell](img/ondemand-alpine-shell.png)
+
 ## Setting up your account 
+
+
 
 ### Setup script 
 
