@@ -53,8 +53,10 @@ Here we are using the `-p` option for `mkdir`. This option allows `mkdir` to cre
 
 It will take about 15 minutes to download the files.
 ~~~
-mkdir -p ~/dc_workshop/data/untrimmed_fastq/
-cd ~/dc_workshop/data/untrimmed_fastq
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
+
+mkdir -p 01_input/untrimmed_fastq/
+cd 01_input/untrimmed_fastq
 
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz
@@ -351,7 +353,9 @@ Here, we see positions within the read in which the boxes span a much wider rang
 We will now assess the quality of the reads that we downloaded. First, make sure you are still in the `untrimmed_fastq` directory
 
 ~~~
-$ cd ~/dc_workshop/data/untrimmed_fastq/
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
+
+$ cd 01_input/untrimmed_fastq/
 ~~~
 {: .bash}
 
@@ -382,6 +386,9 @@ $ cd ~/dc_workshop/data/untrimmed_fastq/
 >>
 > {: .solution}
 {: .challenge}
+
+
+# write a job script for fastqc
 
 FastQC can accept multiple file names as input, and on both zipped and unzipped files, so we can use the \*.fastq* wildcard to run FastQC on all of the FASTQ files in this directory.
 
