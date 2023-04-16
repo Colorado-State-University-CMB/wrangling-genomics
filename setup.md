@@ -209,3 +209,13 @@ them.
 
 **Important** whenever we want to call these 
 programs, we have to have qc-trim activated first. 
+
+### alignment and variant calling
+
+```
+conda create env -n vcf bwa samtools bcftools
+```
+
+Exercise : activate the environment and test
+ that the software was installed.
+
