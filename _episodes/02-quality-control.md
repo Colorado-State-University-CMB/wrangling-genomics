@@ -388,9 +388,44 @@ $ cd 01_input/untrimmed_fastq/
 {: .challenge}
 
 
-# write a job script for fastqc
+# Write a job script for `fastqc`
 
-FastQC can accept multiple file names as input, and on both zipped and unzipped files, so we can use the \*.fastq* wildcard to run FastQC on all of the FASTQ files in this directory.
+One of the most important challenges is organizing 
+your directory structure for a workflow. 
+The following organization conveniently
+separates input files from scripts, and 
+generated output. You may find a different
+ organization suits you better, but we will use this:
+
+```
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
+mkdir 01_input
+mkdir 02_scripts
+mkdir 03_output
+```
+
+We will keep our scripts in 02_scripts,
+and for convenience, we will run them in 
+that directory. 
+So care must be taken to make sure the pathnames
+are specified properly. 
+
+For examples, if we are inside 02_scripts, 
+then we refer to 01_input as ../01_input. 
+Likewise, we refer to 03_output as ../03_output
+This will be clear in the arguments we
+use with the fastq command. 
+
+```
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
+cd 02_scripts
+```
+
+FastQC can accept multiple file names 
+as input, and on both zipped and
+ unzipped files, so we can use the 
+\*.fastq* wildcard to run FastQC on all
+ of the FASTQ files in this directory.
 
 ~~~
 $ fastqc *.fastq*
@@ -458,10 +493,10 @@ will move these
 output files into a new directory within our `results/` directory.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
-mkdir -p 03_output/fastqc_untrimmed_reads
-mv *.zip 03_output/fastqc_untrimmed_reads/
-mv *.html 03_output/fastqc_untrimmed_reads/
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine/03_output/ 
+mkdir fastqc_untrimmed_reads
+mv *.zip fastqc_untrimmed_reads/
+mv *.html fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
@@ -469,7 +504,7 @@ Now we can navigate into this results directory and do some closer
 inspection of our output files.
 
 ~~~
-cd 03_output/fastqc_untrimmed_reads/
+cd fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
