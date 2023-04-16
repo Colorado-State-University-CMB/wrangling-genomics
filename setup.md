@@ -104,7 +104,21 @@ They look like
 #SBATCH --nodes=1
 #SBATCH --time=1:00:00
 ```
-
-The previous "sbatch" headers request
+These "SBATCH" headers request
  4 CPUs on one node, for 1 hour.
+
+All "SBATCH" headers go beneath a line
+ called shebang, and must come before 
+the commands of the script. 
+
+```
+#!/usr/bin/env bash
+#SBATCH --ntasks=4
+#SBATCH --nodes=1
+#SBATCH --time=1:00:00
+
+Command1
+
+Command2
+```
 
