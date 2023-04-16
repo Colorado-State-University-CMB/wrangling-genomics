@@ -410,11 +410,16 @@ that directory.
 So care must be taken to make sure the pathnames
 are specified properly. 
 
-For examples, if we are inside 02_scripts, 
+For example, if we are inside 02_scripts, 
 then we refer to 01_input as ../01_input. 
 Likewise, we refer to 03_output as ../03_output
 This will be clear in the arguments we
 use with the fastq command. 
+
+---
+
+To begin writing our script, go to 
+02_scripts. 
 
 ```
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine
