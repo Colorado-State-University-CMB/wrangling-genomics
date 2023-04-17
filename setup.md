@@ -269,6 +269,20 @@ Please update conda by running
 
 IGNORE IT.
 
+You will eventually see something *LIKE* this, but may not be exactly the same:
+
+```
+The following NEW packages will be INSTALLED:
+  fastqc             bioconda/noarch::fastqc-0.12.1-hdfd78af_0
+  font-ttf-dejavu-s~ pkgs/main/noarch::font-ttf-dejavu-sans-mono-2.37-hd3eb1b0_0
+  fontconfig         pkgs/main/linux-64::fontconfig-2.14.1-h4c34cd2_2
+  gdbm               pkgs/main/linux-64::gdbm-1.18-hd4cb3f1_4
+  icu                pkgs/main/linux-64::icu-58.2-he6710b0_3
+  libxml2            pkgs/main/linux-64::libxml2-2.10.3-hcbfbd50_0
+  perl               pkgs/main/linux-64::perl-5.34.0-h5eee18b_2
+Proceed ([y]/n)? 
+```
+
 Hit **enter** to proceed with downloading
  and installation.
 
@@ -283,7 +297,7 @@ conda activate qc-trim
 
 Run fastqc without arguments
 ```
-fastqc
+fastqc -h
 ```
 Run trimmomatic without arguments
 ```
