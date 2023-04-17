@@ -157,9 +157,15 @@ sbatch Downloader.sbatch
 
 You will get a job ID if the submission was successful.
 
-#### Using the aliases from the setup script
+~~~
+Submitted batch job 1129890
+~~~
+{: .output}
 
-The aliases were not working for me properly yesterday (Alpine is in growing pains). See 
+
+#### Using slurm commands to check the job status
+
+**The aliases were not working for me properly yesterday (Alpine is in growing pains).** See 
 Jobs->Active Jobs tab in the on-demand interface for a report that does appear to be working.
 
 |Alias|Command|Description|
@@ -167,16 +173,6 @@ Jobs->Active Jobs tab in the on-demand interface for a report that does appear t
 |sq|squeue -u $USER|squeue gives you a report of what you have running and what is waiting in the job queue|
 |sa|sacct -X --format JobID,JobName,AllocCPUS,State,ExitCode,Elapsed,TimeLimit,Submit,Start,End|sacct is a job report|
 
-
-~~~
-sbatch Downloader.sbatch 
-~~~
-{: .bash}
-
-~~~
-Submitted batch job 1129890
-~~~
-{: .output}
 
 
 Mine *seemed* to wait in the queue for a long time:
