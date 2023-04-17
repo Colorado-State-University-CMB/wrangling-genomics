@@ -606,11 +606,9 @@ This time, we are going to use more than one CPU. We'll use a ***special variabl
 #SBATCH --qos=normal
 #SBATCH --job-name=fastqc
 
-# uncomment below if you uncommented "conda activate qc-trim", but conda was not found
-# source /curc/sw/anaconda3/latest
+source /curc/sw/anaconda3/latest
 
-# uncomment below if qc-trim is not loaded in the job
-# conda activate qc-trim
+conda activate qc-trim
 
 mkdir -p ../03_output/fastqc_untrimmed_reads
 
