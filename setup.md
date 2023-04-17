@@ -245,7 +245,7 @@ are installed into a single environment.
 for `fastq` and `trimmomatic` called `qc-trim` 
 
 ```
-conda create env -n qc-trim fastq trimmomatic
+conda create --name qc-trim fastqc trimmomatic
 ```
 
 This message is OK: **frozen solve failed**
@@ -256,6 +256,18 @@ The installation tries different "solves",
 After this step, conda will have figured
 out what the requested programs need, and
 will ask if you want to proceed.
+
+You may get the following message:
+
+```
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.13.0
+  latest version: 23.3.1
+Please update conda by running
+    $ conda update -n base -c defaults conda
+```
+
+IGNORE IT.
 
 Hit **enter** to proceed with downloading
  and installation.
