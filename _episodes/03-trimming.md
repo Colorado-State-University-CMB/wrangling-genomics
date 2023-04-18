@@ -164,11 +164,11 @@ trimmomatic PE \
 ~~~
 filename=SRR2589044_1.fastq.gz # want to remove "_1.fastq.gz" 
 accession=${filename/_1.fastq.gz/} # ${variable/find/replace} 
-echo "processing accession $accession" 
+echo "processing accession $accession" # prints: processing accession SRR2589044" 
 trimmomatic PE \
-   $accession_1.fastq.gz      $accession_2.fastq.gz \
-   $accession_1.trim.fastq.gz $accession_1un.trim.fastq.gz \
-   $accession_2.trim.fastq.gz $accession_2un.trim.fastq.gz \
+   ${accession}_1.fastq.gz      ${accession}_2.fastq.gz \
+   ${accession}_1.trim.fastq.gz ${accession}_1un.trim.fastq.gz \
+   ${accession}_2.trim.fastq.gz ${accession}_2un.trim.fastq.gz \
    SLIDINGWINDOW:4:20 \
    MINLEN:25 \
    ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
