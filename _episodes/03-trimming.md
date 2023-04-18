@@ -158,19 +158,16 @@ trimmomatic PE \
    ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
 ~~~
 {: .bash}
-
-> ## Multi-line commands 
-> Some of the commands we ran in this lesson are long! When typing a long 
-> command into your terminal, you can use the `\` character
-> to separate code chunks onto separate lines. This can make your code more readable.
-{: .callout}
-
+ 
 > ## Using variables and string functions to generalize a script**
+> You can generalize your script by replacing explicit values in your
+> code with that of a variable. You set the variable before using it, so, 
+> when you want to change your script to work on a different value, that value
+> only needs to be changed in one place. 
 > ~~~
 > filename=SRR2589044_1.fastq.gz # want to remove "_1.fastq.gz" 
-> accession=${filename/_1.fastq.gz/} # ${variable/find/replace}  
->                                   # ${variable/find/} 
->
+> accession=$(basename $filename _1.fastq.gz}
+>                                   
 > echo "processing accession $accession" # prints: processing accession SRR2589044" 
 >
 > # use $accession to run the command on any of the files
