@@ -876,8 +876,15 @@ it to `fastqc_summaries.txt`.
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
 cat */summary.txt > ../fastqc_summaries.txt
+cd ..
+ls
 ~~~
 {: .bash}
+
+~~~
+fastqc_summaries.txt  fastqc_untrimmed_reads
+~~~
+{: .output}
 
 > ## Exercise
 >
@@ -889,8 +896,8 @@ cat */summary.txt > ../fastqc_summaries.txt
 >> We can get the list of all failed tests using `grep`.
 >>
 >> ~~~
->> $ cd ~/dc_workshop/docs
->> $ grep FAIL fastqc_summaries.txt
+>> # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/
+>> grep FAIL fastqc_summaries.txt
 >> ~~~
 >> {: .bash}
 >>
