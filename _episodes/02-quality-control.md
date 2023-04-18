@@ -88,6 +88,8 @@ nano Downloader.sbatch
 ~~~
 {: .bash}
 
+Save the file now to create it. (you may exit out of nano) 
+
 Breakdown of the above script header:
 
 |Code|Description|
