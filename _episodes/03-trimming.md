@@ -163,8 +163,12 @@ trimmomatic PE \
 
 ~~~
 filename=SRR2589044_1.fastq.gz # want to remove "_1.fastq.gz" 
-accession=${filename/_1.fastq.gz/} # ${variable/find/replace} 
+accession=${filename/_1.fastq.gz/} # ${variable/find/replace}  
+                                   # ${variable/find/} 
+
 echo "processing accession $accession" # prints: processing accession SRR2589044" 
+
+# use $accession to run the command on any of the files
 trimmomatic PE \
    ${accession}_1.fastq.gz      ${accession}_2.fastq.gz \
    ${accession}_1.trim.fastq.gz ${accession}_1un.trim.fastq.gz \
