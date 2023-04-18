@@ -31,7 +31,9 @@ filter poor quality reads and trim poor quality bases from our samples.
 Trimmomatic has a variety of options to trim your reads. If we run the following command, we can see some of our options.
 
 ~~~
-$ trimmomatic
+# don't need to be in a particular directory, but need env:
+# conda activate qc-trim
+trimmomatic
 ~~~
 {: .bash}
 
@@ -79,10 +81,11 @@ analysis. It is important to understand the steps you are using to
 clean your data. For more information about the Trimmomatic arguments
 and options, see [the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
 
-However, a complete command for Trimmomatic will look something like the command below. This command is an example and will not work, as we do not have the files it refers to:
+However, a complete command for Trimmomatic will look something like the command below. **This command is an example and will not work, as we do not have the files it refers to**:
 
 ~~~
-$ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
+# only an example command
+trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
               SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
               SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq \
               ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
@@ -113,23 +116,154 @@ In this example, we have told Trimmomatic:
 {: .callout}
 
 ~~~
-$ cd ~/dc_workshop/data/untrimmed_fastq
+
 ~~~
 {: .bash}
 
 ## Running Trimmomatic
 
-Now we will run Trimmomatic on our data. To begin, navigate to your `untrimmed_fastq` data directory:
+Now we will run Trimmomatic on our data. But first, explore the directory pointed to by `$CONDA_PREFIX` to get data that was installed with trimmomatic.
+
+### Exploring your conda environment/installation
 
 ~~~
-$ cd ~/dc_workshop/data/untrimmed_fastq
+# don't need to be in a specific directory
+echo $CONDA_PREFIX
 ~~~
 {: .bash}
+
+David's output
+~~~
+/projects/.colostate.edu/dcking/software/anaconda/envs/qc-trim
+~~~
+{: .output}
+
+This is a subdirectory of my /projects directory that is just for the environment qc-trim.  All programs data I installed into this environment
+will be in here.  Let's explore it. *Yours may differ for some packages*
+
+~~~
+# don't need to be in a specific directory
+ls $CONDA_PREFIX
+~~~
+{: .bash}
+
+David's output
+~~~
+bin              conda-meta  etc    include  legal  libexec  opt      share  var                          x86_64-conda-linux-gnu
+compiler_compat  conf        fonts  jmods    lib    man      release  ssl    x86_64-conda_cos7-linux-gnu
+~~~
+{: .output}
+
+Installed programs are in `bin`, whereas installed data is typical in `share`.
+
+~~~
+# don't need to be in a specific directory
+ls $CONDA_PREFIX/share
+~~~
+{: .bash}
+
+*My `share` directory`*:
+
+~~~
+aclocal          dbus-1  fontconfig  glib-2.0  info      locale  tabset    trimmomatic         xml
+bash-completion  doc     gettext     icu       licenses  man     terminfo  trimmomatic-0.39-2  zoneinfo
+~~~
+{: .output}
+
+There are two `trimmomatic` directories, but `trimmomatic` is just a link (alias) to `trimmomatic-0.39-2`.
+
+~~~
+# don't need to be in a specific directory
+total 568
+drwxr-xr-x.  2 dcking@colostate.edu erinnishgrp@colostate.edu  149 Apr 16 20:01 aclocal
+drwxr-xr-x.  3 dcking@colostate.edu erinnishgrp@colostate.edu   29 Apr 16 19:58 bash-completion
+drwxr-xr-x.  2 dcking@colostate.edu erinnishgrp@colostate.edu   59 Apr 16 19:58 dbus-1
+drwxr-xr-x.  6 dcking@colostate.edu erinnishgrp@colostate.edu   91 Apr 16 19:58 doc
+drwxr-xr-x.  3 dcking@colostate.edu erinnishgrp@colostate.edu   28 Apr 16 20:01 fontconfig
+drwxr-xr-x.  3 dcking@colostate.edu erinnishgrp@colostate.edu   21 Apr 16 19:58 gettext
+drwxr-xr-x.  6 dcking@colostate.edu erinnishgrp@colostate.edu   97 Apr 16 19:58 glib-2.0
+drwxr-xr-x.  3 dcking@colostate.edu erinnishgrp@colostate.edu   22 Apr 16 20:01 icu
+drwxr-xr-x.  2 dcking@colostate.edu erinnishgrp@colostate.edu  213 Apr 16 20:01 info
+drwxr-xr-x.  4 dcking@colostate.edu erinnishgrp@colostate.edu   53 Apr 16 19:57 licenses
+drwxr-xr-x. 27 dcking@colostate.edu erinnishgrp@colostate.edu  509 Apr 16 20:01 locale
+drwxr-xr-x.  8 dcking@colostate.edu erinnishgrp@colostate.edu  128 Apr 16 20:01 man
+drwxr-xr-x.  2 dcking@colostate.edu erinnishgrp@colostate.edu   91 Apr 16 19:57 tabset
+drwxr-xr-x. 44 dcking@colostate.edu erinnishgrp@colostate.edu  798 Apr 16 19:57 terminfo
+lrwxrwxrwx.  1 dcking@colostate.edu erinnishgrp@colostate.edu   18 Apr 16 19:58 trimmomatic -> trimmomatic-0.39-2
+drwxr-xr-x.  3 dcking@colostate.edu erinnishgrp@colostate.edu  224 Apr 16 19:58 trimmomatic-0.39-2
+drwxr-xr-x.  4 dcking@colostate.edu erinnishgrp@colostate.edu   52 Apr 16 20:01 xml
+drwxr-xr-x. 19 dcking@colostate.edu erinnishgrp@colostate.edu 1590 Apr 16 19:57 zoneinfo
+~~~
+{: .output}
+
+Explore `trimmomatic`
+
+~~~
+# don't need to be in a specific directory
+ls $CONDA_PREFIX/share/trimmomatic
+~~~
+{: .bash}
+
+~~~
+adapters  build_env_setup.sh  conda_build.sh  LICENSE  metadata_conda_debug.yaml  trimmomatic  trimmomatic.jar
+~~~
+{: .output}
+
+~~~
+# don't need to be in a specific directory
+ls $CONDA_PREFIX/share/trimmomatic/adapters
+~~~
+{: .bash}
+
+~~~
+NexteraPE-PE.fa  TruSeq2-PE.fa  TruSeq2-SE.fa  TruSeq3-PE-2.fa  TruSeq3-PE.fa  TruSeq3-SE.fa
+~~~
+{: .output}
+
+**WE FOUND IT***
+The adapter sequences are just short fasta format sequences
+~~~
+# don't need to be in a specific directory
+cat $CONDA_PREFIX/share/trimmomatic/adapters/NexteraPE-PE.fa 
+~~~
+{: .bash}
+
+~~~
+>PrefixNX/1
+AGATGTGTATAAGAGACAG
+>PrefixNX/2
+AGATGTGTATAAGAGACAG
+>Trans1
+TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+>Trans1_rc
+CTGTCTCTTATACACATCTGACGCTGCCGACGA
+>Trans2
+GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+>Trans2_rc
+CTGTCTCTTATACACATCTCCGAGCCCACGAGAC
+~~~
+{: .output}
+
 
 We are going to run Trimmomatic on one of our paired-end samples. 
 While using FastQC we saw that Nextera adapters were present in our samples. 
 The adapter sequences came with the installation of trimmomatic, so we will first copy these sequences into our current directory.
 
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/01_input/untrimmed_fastq
+cp $CONDA_PREFIX/share/trimmomatic/adapters/NexteraPE-PE.fa .
+ls
+~~~
+{: .bash}
+
+~~~
+NexteraPE-PE.fa        SRR2584863_2.fastq     SRR2584866_1.fastq.gz  SRR2589044_1.fastq     SRR2589044_2.fastq.gz
+SRR2584863_1.fastq     SRR2584863_2.fastq.gz  SRR2584866_2.fastq     SRR2589044_1.fastq.gz
+SRR2584863_1.fastq.gz  SRR2584866_1.fastq     SRR2584866_2.fastq.gz  SRR2589044_2.fastq
+~~~
+{: .output}
+
+New command template (this is not the actual command)
 ~~~ 
 trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
               SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
@@ -271,7 +405,7 @@ gzip SRR2584863_1.fastq
 $ for infile in *_1.fastq.gz
 > do
 >   base=$(basename ${infile} _1.fastq.gz)
->   trimmomatic PE ${infile} ${base}_2.fastq.gz \
+>   echo PE ${infile} ${base}_2.fastq.gz \
 >                ${base}_1.trim.fastq.gz ${base}_1un.trim.fastq.gz \
 >                ${base}_2.trim.fastq.gz ${base}_2un.trim.fastq.gz \
 >                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 
@@ -285,7 +419,8 @@ Trimmomatic to run for each of our six input files. Once it is done
 running, take a look at your directory contents. You will notice that even though we ran Trimmomatic on file `SRR2589044` before running the for loop, there is only one set of files for it. Because we matched the ending `_1.fastq.gz`, we re-ran Trimmomatic on this file, overwriting our first results. That is ok, but it is good to be aware that it happened.
 
 ~~~
-$ ls
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/trimmed_fastq
+ls
 ~~~
 {: .bash}
 
@@ -326,11 +461,9 @@ control process! Before we move on, let's move our trimmed FASTQ files
 to a new subdirectory within our `data/` directory.
 
 ~~~
-$ cd ~/dc_workshop/data/untrimmed_fastq
-$ mkdir ../trimmed_fastq
-$ mv *.trim* ../trimmed_fastq
-$ cd ../trimmed_fastq
-$ ls
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+cd ../03_output/trimmed_fastq
+ls
 ~~~
 {: .bash}
 
