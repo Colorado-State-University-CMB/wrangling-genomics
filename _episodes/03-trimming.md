@@ -159,25 +159,31 @@ trimmomatic PE \
 ~~~
 {: .bash}
 
-**Using variables and string functions to generalize a script**
+> ## Multi-line commands 
+> Some of the commands we ran in this lesson are long! When typing a long 
+> command into your terminal, you can use the `\` character
+> to separate code chunks onto separate lines. This can make your code more readable.
+{: .callout}
 
-~~~
-filename=SRR2589044_1.fastq.gz # want to remove "_1.fastq.gz" 
-accession=${filename/_1.fastq.gz/} # ${variable/find/replace}  
-                                   # ${variable/find/} 
-
-echo "processing accession $accession" # prints: processing accession SRR2589044" 
-
-# use $accession to run the command on any of the files
-trimmomatic PE \
-   ${accession}_1.fastq.gz      ${accession}_2.fastq.gz \
-   ${accession}_1.trim.fastq.gz ${accession}_1un.trim.fastq.gz \
-   ${accession}_2.trim.fastq.gz ${accession}_2un.trim.fastq.gz \
-   SLIDINGWINDOW:4:20 \
-   MINLEN:25 \
-   ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
-~~~
-{: .bash}
+> ## Using variables and string functions to generalize a script**
+> ~~~
+> filename=SRR2589044_1.fastq.gz # want to remove "_1.fastq.gz" 
+> accession=${filename/_1.fastq.gz/} # ${variable/find/replace}  
+>                                   # ${variable/find/} 
+>
+> echo "processing accession $accession" # prints: processing accession SRR2589044" 
+>
+> # use $accession to run the command on any of the files
+> trimmomatic PE \
+>   ${accession}_1.fastq.gz      ${accession}_2.fastq.gz \
+>   ${accession}_1.trim.fastq.gz ${accession}_1un.trim.fastq.gz \
+>   ${accession}_2.trim.fastq.gz ${accession}_2un.trim.fastq.gz \
+>   SLIDINGWINDOW:4:20 \
+>   MINLEN:25 \
+>   ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+>~~~
+>{: .bash}
+{: .callout}
 
 
 ~~~
