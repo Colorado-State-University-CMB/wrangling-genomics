@@ -711,14 +711,11 @@ We have now looked at quite a few "Per base sequence quality" FastQC graphs, but
 
 ## Working with the FastQC text output
 
-~~Now that we have looked at our HTML reports to get a feel for the data,
+Now that we have looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
-in your terminal program that is connected to your AWS instance
-(the tab label will start with `dcuser@ip`) and make sure you are in
-our results subdirectory~~
-
+open to the terminal.
 ~~~
-$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+$ cd # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output
 $ ls
 ~~~
 {: .bash}
@@ -737,29 +734,10 @@ view the contents of a `.zip` file, we can use the program `unzip`
 to decompress these files. Let's try doing them all at once using a
 wildcard.
 
-~~~
-$ unzip *.zip
-~~~
-{: .bash}
 
-~~~
-Archive:  SRR2584863_1_fastqc.zip
-caution: filename not matched:  SRR2584863_2_fastqc.zip
-caution: filename not matched:  SRR2584866_1_fastqc.zip
-caution: filename not matched:  SRR2584866_2_fastqc.zip
-caution: filename not matched:  SRR2589044_1_fastqc.zip
-caution: filename not matched:  SRR2589044_2_fastqc.zip
-~~~
-{: .output}
-
-This did not work. We unzipped the first file and then got a warning
-message for each of the other `.zip` files. This is because `unzip` 
-expects to get only one zip file as input. We could go through and 
-unzip each file one at a time, but this is very time consuming and 
-error-prone. Someday you may have 500 files to unzip!
-
-A more efficient way is to use a `for` loop like we learned in the Shell Genomics lesson to iterate through all of
-our `.zip` files. Let's see what that looks like and then we will 
+We can't do `unzip *.zip` like we did `gunzip *.gz` because it doesn't support multiple files on the command line.
+Therefore, we'll use a `for` loop like we learned in the Shell Genomics lesson to iterate through all of
+our `.zip` files and unzip them. Let's see what that looks like and then we will 
 discuss what we are doing with each line of our loop.
 
 ~~~
@@ -829,11 +807,12 @@ SRR2584863_2_fastqc.zip   SRR2584866_2_fastqc.zip   SRR2589044_2_fastqc.zip
 {:. output}
 
 The `.html` files and the uncompressed `.zip` files are still present,
-but now we also have a new directory for each of our samples. We can 
+***but now we also have a new directory for each of our samples.*** We can 
 see for sure that it is a directory if we use the `-F` flag for `ls`. 
 
 ~~~
-$ ls -F
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+ls -F
 ~~~
 {: .bash}
 
@@ -850,7 +829,8 @@ SRR2584863_2_fastqc.zip   SRR2584866_2_fastqc.zip   SRR2589044_2_fastqc.zip
 Let's see what files are present within one of these output directories.
 
 ~~~
-$ ls -F SRR2584863_1_fastqc/
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+ls -F SRR2584863_1_fastqc/
 ~~~
 {: .bash}
 
@@ -862,7 +842,8 @@ fastqc_data.txt  fastqc.fo  fastqc_report.html	Icons/	Images/  summary.txt
 Use `less` to preview the `summary.txt` file for this sample.
 
 ~~~
-$ less SRR2584863_1_fastqc/summary.txt
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+less SRR2584863_1_fastqc/summary.txt
 ~~~
 {: .bash}
 
@@ -890,10 +871,11 @@ We can make a record of the results we obtained for all our samples
 
 by concatenating all of our `summary.txt` files into a single file 
 using the `cat` command. We will call this `fastqc_summaries.txt` and move
-it to `~/dc_workshop/docs`.
+it to `fastqc_summaries.txt`.
 
 ~~~
-$ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+cat */summary.txt > ../fastqc_summaries.txt
 ~~~
 {: .bash}
 
