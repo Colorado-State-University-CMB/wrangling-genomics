@@ -159,7 +159,7 @@ trimmomatic PE \
 ~~~
 {: .bash}
  
-> ## Using variables and string functions to generalize a script**
+> ## Using variables and string functions to generalize a script
 > You can generalize your script by replacing explicit values in your
 > code with that of a variable. You set the variable before using it, so, 
 > when you want to change your script to work on a different value, that value
@@ -184,6 +184,7 @@ trimmomatic PE \
 >
 {: .callout}
 
+The output from trimmomatic is like this:
 
 ~~~
 TrimmomaticPE: Started with arguments:
