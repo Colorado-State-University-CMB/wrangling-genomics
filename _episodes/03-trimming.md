@@ -109,22 +109,21 @@ In this example, we have told Trimmomatic:
 
 
 
-> ## Multi-line commands 
-> Some of the commands we ran in this lesson are long! When typing a long 
-> command into your terminal, you can use the `\` character
-> to separate code chunks onto separate lines. This can make your code more readable.
-{: .callout}
-
-~~~
-
-~~~
-{: .bash}
 
 ## Running Trimmomatic
 
 Now we will run Trimmomatic on our data. But first, explore the directory pointed to by `$CONDA_PREFIX` to get data that was installed with trimmomatic.
 
 ### Exploring your conda environment/installation
+
+> ## Understanding more about conda 
+> We know that we've created conda environments and added software to them,
+> but we don't *see* what conda is doing.
+> One way to look is to explore the directories where conda does its work.
+{: .callout}
+
+This section doesn't require being in a specific directory, because all commands will deal with **absolute paths**. Absolute paths fully describe the 
+location of a file or directory, and are valid regardless of your current working directory. You can identify an absolute path because it always starts with a `/`. We have mainly dealt with *relative paths* so far, which can contain slashes, but never at the very beginning.
 
 ~~~
 # don't need to be in a specific directory
