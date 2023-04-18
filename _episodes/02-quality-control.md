@@ -654,25 +654,19 @@ $
 ~~~
 {: .output}
 
----
-STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE
-STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE STOP HERE
-
 The FastQC program has created several new files within our
 `data/untrimmed_fastq/` directory.
 
 ~~~
-$ ls
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output
+ls fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
 ~~~
-SRR2584863_1.fastq        SRR2584866_1_fastqc.html  SRR2589044_1_fastqc.html
-SRR2584863_1_fastqc.html  SRR2584866_1_fastqc.zip   SRR2589044_1_fastqc.zip
-SRR2584863_1_fastqc.zip   SRR2584866_1.fastq.gz     SRR2589044_1.fastq.gz
-SRR2584863_2_fastqc.html  SRR2584866_2_fastqc.html  SRR2589044_2_fastqc.html
-SRR2584863_2_fastqc.zip   SRR2584866_2_fastqc.zip   SRR2589044_2_fastqc.zip
-SRR2584863_2.fastq.gz     SRR2584866_2.fastq.gz     SRR2589044_2.fastq.gz
+SRR2584863_1_fastqc.html  SRR2584863_2_fastqc.zip   SRR2584866_2_fastqc.html  SRR2589044_1_fastqc.zip
+SRR2584863_1_fastqc.zip   SRR2584866_1_fastqc.html  SRR2584866_2_fastqc.zip   SRR2589044_2_fastqc.html
+SRR2584863_2_fastqc.html  SRR2584866_1_fastqc.zip   SRR2589044_1_fastqc.html  SRR2589044_2_fastqc.zip
 ~~~
 {: .output}
 
@@ -683,120 +677,22 @@ actually a compressed set of multiple output files. We will be working
 with these output files soon. The `.html` file is a stable webpage
 displaying the summary report for each of our samples.
 
-We want to keep our data files and our results files separate, so we
-will move these
-output files into a new directory within our `results/` directory.
+We want to keep our data files and our results files separate, so notice that we
+we had the output files write into a new directory within our `03_output/` directory, using the `-o` argument to fastqc.
 
-~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/ 
-mkdir fastqc_untrimmed_reads
-mv *.zip fastqc_untrimmed_reads/
-mv *.html fastqc_untrimmed_reads/
-~~~
-{: .bash}
 
 Now we can navigate into this results directory and do some closer
-inspection of our output files.
+inspection of our output files. *BUT* we have to download the html (or zip) files
+because they won't render in the ondemand browser. 
 
-~~~
-cd fastqc_untrimmed_reads/
-~~~
-{: .bash}
+Go to /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output in the ondemand file browser.
+
 
 ## Viewing the FastQC results
 
+You can download the html files one at a time, or by checking each box. I recommend saving them all in a new directory.
+Once you have, you can open any of the html files to get the full report for that sample.
 
-If we were working on our local computers, we would be able to look at 
-each of these HTML files by opening them in a web browser.
-
-~~However, these files are currently sitting on our remote AWS 
-instance, where our local computer can not see them.
-And, since we are only logging into the AWS instance via the 
-command line - it does not have any web browser setup to display 
-these files either.~~
-
-So the easiest way to look at these webpage summary reports will be
-to transfer them to our local computers (i.e. your laptop).
-
-To transfer a file from a remote server to our own machines, we will
-use `scp`, which we learned yesterday in the Shell Genomics lesson.
-
-First we
-will make a new directory on our computer to store the HTML files
-we are transferring. Let's put it on our desktop for now. Open a new
-tab in your terminal program (you can use the pull down menu at the
-top of your screen or the Cmd+t keyboard shortcut) and type:
-
-~~~
-$ mkdir -p ~/Desktop/fastqc_html
-~~~
-{: .bash}
-
-Now we can transfer our HTML files to our local computer using `scp`.
-THIS IS FOR DC CARPENTRY AWS
-~~~
-$ scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
-~~~
-{: .bash}
-
-> ## Note on using zsh
-> If you are using zsh instead of bash (macOS for example changed the default recently to zsh), it is
-> likely that a `no matches found` error will be displayed. The reason for this is that the wildcard
-> ("*") is not correctly interpreted. To fix this problem the wildcard needs to be escaped with a "\\":
->> ~~~
->> $ scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/\*.html ~/Desktop/fastqc_html
->> ~~~
->> {: .bash}
-> Alternatively, you can put the whole path into quotation marks:
->> ~~~
->> $ scp "dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html" ~/Desktop/fastqc_html
->> ~~~
->> {: .bash}
-{: .callout}
-
-As a reminder, the first part
-of the command `dcuser@ec2-34-238-162-94.compute-1.amazonaws.com` is
-the address for your remote computer. Make sure you replace everything
-after `dcuser@` with your instance number (the one you used to log in).
-
-The second part starts with a `:` and then gives the absolute path
-of the files you want to transfer from your remote computer. Do not
-forget the `:`. We used a wildcard (`*.html`) to indicate that we want all of
-the HTML files.
-
-The third part of the command gives the absolute path of the location
-you want to put the files. This is on your local computer and is the
-directory we just created `~/Desktop/fastqc_html`.
-
-You should see a status output like this:
-
-~~~
-SRR2584863_1_fastqc.html                      100%  249KB 152.3KB/s   00:01
-SRR2584863_2_fastqc.html                      100%  254KB 219.8KB/s   00:01
-SRR2584866_1_fastqc.html                      100%  254KB 271.8KB/s   00:00
-SRR2584866_2_fastqc.html                      100%  251KB 252.8KB/s   00:00
-SRR2589044_1_fastqc.html                      100%  249KB 370.1KB/s   00:00
-SRR2589044_2_fastqc.html                      100%  251KB 592.2KB/s   00:00
-~~~
-{: .output}
-
-Now we can go to our new directory and open the 6 HTML files.
-
-Depending on your system,
-you should be able to select and open them all at once via a right click menu
-in your file browser.
-
-> ## Exercise
->
-> Discuss your results with a neighbor. Which sample(s) looks the best
-> in terms of per base sequence quality? Which sample(s) look the
-> worst?
->
->> ## Solution
->> All of the reads contain usable data, but the quality decreases toward
->> the end of the reads.
-> {: .solution}
-{: .challenge}
 
 ## Decoding the other FastQC outputs
 We have now looked at quite a few "Per base sequence quality" FastQC graphs, but there are nine other graphs that we have not talked about! Below we have provided a brief overview of interpretations for each of these plots. For more information, please see the FastQC documentation [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) 
