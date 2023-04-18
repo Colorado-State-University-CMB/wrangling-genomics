@@ -220,7 +220,7 @@ NexteraPE-PE.fa  TruSeq2-PE.fa  TruSeq2-SE.fa  TruSeq3-PE-2.fa  TruSeq3-PE.fa  T
 ~~~
 {: .output}
 
-**WE FOUND IT***
+**WE FOUND IT**
 The adapter sequences are just short fasta format sequences
 ~~~
 # don't need to be in a specific directory
@@ -483,4 +483,5 @@ SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.
 ~~~
 {: .output}
 
+## Maintain data integrity with checksums
 
