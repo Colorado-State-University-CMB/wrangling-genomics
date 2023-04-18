@@ -168,9 +168,9 @@ trimmomatic PE \
 > filename=SRR2589044_1.fastq.gz # want to remove "_1.fastq.gz" 
 > accession=$(basename $filename _1.fastq.gz}
 >                                   
-> echo "processing accession $accession" # prints: processing accession SRR2589044" 
->
-> # use $accession to run the command on any of the files
+> echo "processing accession $accession" 
+> # prints: processing accession SRR2589044
+> # replace all previous occurrences of SRR2589044 with ${accession}
 > trimmomatic PE \
 >   ${accession}_1.fastq.gz      ${accession}_2.fastq.gz \
 >   ${accession}_1.trim.fastq.gz ${accession}_1un.trim.fastq.gz \
@@ -180,6 +180,8 @@ trimmomatic PE \
 >   ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
 >~~~
 >{: .bash}
+> You have to do `${accession}` to separate the variable name from the trailing underscores (i.e. `${accession}_`) 
+>
 {: .callout}
 
 
