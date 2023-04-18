@@ -259,7 +259,8 @@ While using FastQC we saw that Nextera adapters were present in our samples.
 The adapter sequences came with the installation of trimmomatic, so we will first copy these sequences into our current directory.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/01_input/untrimmed_fastq
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC
+cd ../01_input/untrimmed_fastq
 cp $CONDA_PREFIX/share/trimmomatic/adapters/NexteraPE-PE.fa .
 ls
 ~~~
