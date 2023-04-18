@@ -512,8 +512,7 @@ We will now assess the quality of the reads that we downloaded. First, make sure
 
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC
-
-$ cd 01_input/untrimmed_fastq/
+cd 01_input/untrimmed_fastq/
 ~~~
 {: .bash}
 
@@ -715,8 +714,8 @@ Now that we have looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
 open to the terminal.
 ~~~
-$ cd # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output
-$ ls
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+ls
 ~~~
 {: .bash}
 
@@ -741,7 +740,8 @@ our `.zip` files and unzip them. Let's see what that looks like and then we will
 discuss what we are doing with each line of our loop.
 
 ~~~
-$ for filename in *.zip
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+for filename in *.zip
 > do
 > unzip $filename
 > done
