@@ -130,7 +130,9 @@ Now we will run Trimmomatic on our data. But first, explore the directory pointe
 > One way to look is to explore the directories where conda does its work.
 {: .callout}
 
-This section doesn't require being in a specific directory, because all commands will deal with **absolute paths**. Absolute paths fully describe the 
+This *section doesn't require being in a specific directory,* because all commands will deal with **absolute paths**. 
+
+Absolute paths fully describe the 
 location of a file or directory, and are valid regardless of your current working directory. You can identify an absolute path because it always starts with a `/`. We have mainly dealt with *relative paths* so far, which can contain slashes, but never at the very beginning.
 
 ~~~
