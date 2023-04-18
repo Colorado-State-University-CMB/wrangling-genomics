@@ -159,6 +159,22 @@ trimmomatic PE \
 ~~~
 {: .bash}
 
+**Using variables and string functions to generalize a script**
+
+~~~
+filename=SRR2589044_1.fastq.gz # want to remove "_1.fastq.gz" 
+accession=${filename/_1.fastq.gz/} # ${variable/find/replace} 
+echo "processing accession $accession" 
+trimmomatic PE \
+   $accession_1.fastq.gz      $accession_2.fastq.gz \
+   $accession_1.trim.fastq.gz $accession_1un.trim.fastq.gz \
+   $accession_2.trim.fastq.gz $accession_2un.trim.fastq.gz \
+   SLIDINGWINDOW:4:20 \
+   MINLEN:25 \
+   ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+~~~
+{: .bash}
+
 
 ~~~
 TrimmomaticPE: Started with arguments:
