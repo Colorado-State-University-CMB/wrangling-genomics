@@ -612,7 +612,10 @@ fastqc -o ../03_output/fastqc_untrimmed_reads -t $SLURM_NTASKS ../01_input/untri
 ~~~
 {: .bash}
 
+Save your script and submit using `sbatch`
+
 ~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
 sbatch fastqc.sbatch
 ~~~
 {: .bash}
