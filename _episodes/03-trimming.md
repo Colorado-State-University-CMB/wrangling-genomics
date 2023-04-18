@@ -112,7 +112,10 @@ In this example, we have told Trimmomatic:
 > to separate code chunks onto separate lines. This can make your code more readable.
 {: .callout}
 
-
+~~~
+$ cd ~/dc_workshop/data/untrimmed_fastq
+~~~
+{: .bash}
 
 ## Running Trimmomatic
 
@@ -127,8 +130,12 @@ We are going to run Trimmomatic on one of our paired-end samples.
 While using FastQC we saw that Nextera adapters were present in our samples. 
 The adapter sequences came with the installation of trimmomatic, so we will first copy these sequences into our current directory.
 
+trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
+              SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
+              SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq \
+              ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
 ~~~
-$ cp ~/.miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/NexteraPE-PE.fa .
+#
 ~~~
 {: .bash}
 
@@ -143,10 +150,11 @@ will use these numbers as a default and recognize they are needed to for Trimmom
 to run properly. This command will take a few minutes to run.
 
 ~~~
-$ trimmomatic PE SRR2589044_1.fastq.gz SRR2589044_2.fastq.gz \
-                SRR2589044_1.trim.fastq.gz SRR2589044_1un.trim.fastq.gz \
-                SRR2589044_2.trim.fastq.gz SRR2589044_2un.trim.fastq.gz \
-                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+trimmomatic PE \
+   SRR2589044_1.fastq.gz      SRR2589044_2.fastq.gz \
+   SRR2589044_1.trim.fastq.gz SRR2589044_1un.trim.fastq.gz \
+   SRR2589044_2.trim.fastq.gz SRR2589044_2un.trim.fastq.gz \
+   SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
 ~~~
 {: .bash}
 
