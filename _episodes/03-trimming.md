@@ -119,6 +119,7 @@ Now we will run Trimmomatic on our data. But first, explore the directory pointe
 > ## Understanding more about conda 
 > We know that we've created conda environments and added software to them,
 > but we don't *see* what conda is doing.
+> 
 > One way to look is to explore the directories where conda does its work.
 {: .callout}
 
@@ -161,7 +162,7 @@ ls $CONDA_PREFIX/share
 ~~~
 {: .bash}
 
-*My `share` directory`*:
+*My `share` directory*:
 
 ~~~
 aclocal          dbus-1  fontconfig  glib-2.0  info      locale  tabset    trimmomatic         xml
@@ -283,14 +284,30 @@ to run properly.
 
 This command will take a few minutes to run. ***(faster on Alpine)***
 
+Make a script called `trimmomatic.sbatch`.
+
 ~~~
+#!/usr/bin/env bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --time=0:10:00
+#SBATCH --partition=amilan
+#SBATCH --qos=normal
+#SBATCH --job-name=trimmomatic
+
+source /curc/sw/anaconda3/latest
+
+conda activate qc-trim
+
+adapters_fa=../01_input/NexteraPE-PE.fa
+
 trimmomatic PE \
    SRR2589044_1.fastq.gz      SRR2589044_2.fastq.gz \
    SRR2589044_1.trim.fastq.gz SRR2589044_1un.trim.fastq.gz \
    SRR2589044_2.trim.fastq.gz SRR2589044_2un.trim.fastq.gz \
    SLIDINGWINDOW:4:20 \
    MINLEN:25 \
-   ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+   ILLUMINACLIP:$adapters_fa:2:40:15
 ~~~
 {: .bash}
  
@@ -312,7 +329,7 @@ trimmomatic PE \
 >   ${accession}_2.trim.fastq.gz ${accession}_2un.trim.fastq.gz \
 >   SLIDINGWINDOW:4:20 \
 >   MINLEN:25 \
->   ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+>   ILLUMINACLIP:$adapters_fa:2:40:15
 >~~~
 >{: .bash}
 > You have to do `${accession}` to separate the variable name from the trailing underscores (i.e. `${accession}_`) 
@@ -401,14 +418,27 @@ gzip SRR2584863_1.fastq
 {: .bash}
 
 ~~~
-$ for infile in *_1.fastq.gz
-> do
->   base=$(basename ${infile} _1.fastq.gz)
->   echo PE ${infile} ${base}_2.fastq.gz \
->                ${base}_1.trim.fastq.gz ${base}_1un.trim.fastq.gz \
->                ${base}_2.trim.fastq.gz ${base}_2un.trim.fastq.gz \
->                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 
-> done
+#!/usr/bin/env bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --time=0:10:00
+#SBATCH --partition=amilan
+#SBATCH --qos=normal
+#SBATCH --job-name=trimmomatic
+
+source /curc/sw/anaconda3/latest
+
+conda activate qc-trim
+
+adapters_fa=../01_input/NexteraPE-PE.fa
+for infile in *_1.fastq.gz
+ do
+   base=$(basename ${infile} _1.fastq.gz)
+   trimmomatic PE ${infile} ${base}_2.fastq.gz \
+                ${base}_1.trim.fastq.gz ${base}_1un.trim.fastq.gz \
+                ${base}_2.trim.fastq.gz ${base}_2un.trim.fastq.gz \
+                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:$adapters_fa:2:40:15 
+done
 ~~~
 {: .bash}
 
@@ -434,27 +464,6 @@ SRR2584863_2un.trim.fastq.gz  SRR2589044_1.fastq.gz
 ~~~
 {: .output}
 
-> ## Exercise
-> We trimmed our fastq files with Nextera adapters, 
-> but there are other adapters that are commonly used.
-> What other adapter files came with Trimmomatic?
->
->
->> ## Solution
->> ~~~
->> $ ls ~/miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/
->> ~~~
->> {: .bash}
->>
->> ~~~
->> NexteraPE-PE.fa  TruSeq2-SE.fa    TruSeq3-PE.fa
->> TruSeq2-PE.fa    TruSeq3-PE-2.fa  TruSeq3-SE.fa
->> ~~~
->> {: .output}
->>
-> {: .solution}
-{: .challenge}
-
 We have now completed the trimming and filtering steps of our quality
 control process! Before we move on, let's move our trimmed FASTQ files
 to a new subdirectory within our `data/` directory.
@@ -474,43 +483,4 @@ SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.
 ~~~
 {: .output}
 
-> ## Bonus exercise (advanced)
->
-> Now that our samples have gone through quality control, they should perform
-> better on the quality tests run by FastQC. Go ahead and re-run
-> FastQC on your trimmed FASTQ files and visualize the HTML files
-> to see whether your per base sequence quality is higher after
-> trimming.
->
->> ## Solution
->>
->> In your AWS terminal window do:
->>
->> ~~~
->> $ fastqc ~/dc_workshop/data/trimmed_fastq/*.fastq*
->> ~~~
->> {: .bash}
->>
->> In a new tab in your terminal do:
->>
->> ~~~
->> $ mkdir ~/Desktop/fastqc_html/trimmed
->> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
->> ~~~
->> {: .bash}
->> 
->> Then take a look at the html files in your browser.
->> 
->> Remember to replace everything between the `@` and `:` in your scp
->> command with your AWS instance number.
->>
->> After trimming and filtering, our overall quality is much higher, 
->> we have a distribution of sequence lengths, and more samples pass 
->> adapter content. However, quality trimming is not perfect, and some
->> programs are better at removing some sequences than others. Because our
->> sequences still contain 3' adapters, it could be important to explore
->> other trimming tools like [cutadapt](http://cutadapt.readthedocs.io/en/stable/) to remove these, depending on your
->> downstream application. Trimmomatic did pretty well though, and its performance
->> is good enough for our workflow.
-> {: .solution}
-{: .challenge}
+
