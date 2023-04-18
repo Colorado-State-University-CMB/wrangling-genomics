@@ -62,6 +62,13 @@ In paired end mode, Trimmomatic expects the two input files, and then the names 
 |  \<outputFile2P> | Output file that contains surviving pairs from the `_2` file.|
 |  \<outputFile2U> | Output file that contains orphaned reads from the `_2` file.|
 
+Two important parameters that we'll use to keep our data organized in our directory structure:
+
+| option    | meaning |
+| ------- | ---------- |
+|  \<basein>  | This will automatically prepend our *input* file names with a value. Ours is `../01_input`|
+|  \<baseout> | This will automatically prepend our *output* file names with a value. Ours is `../03_output`|
+
 The last thing trimmomatic expects to see is the trimming parameters:
 
 | step   | meaning |
