@@ -450,14 +450,21 @@ source /curc/sw/anaconda3/latest
 
 conda activate qc-trim
 
-adapters_fa=../01_input/NexteraPE-PE.fa
-for infile in *_1.fastq.gz
- do
-   base=$(basename ${infile} _1.fastq.gz)
-   trimmomatic PE ${infile} ${base}_2.fastq.gz \
-                ${base}_1.trim.fastq.gz ${base}_1un.trim.fastq.gz \
-                ${base}_2.trim.fastq.gz ${base}_2un.trim.fastq.gz \
-                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:$adapters_fa:2:40:15 
+adapters_fa=../01_input/untrimmed_fastq/NexteraPE-PE.fa
+IN=../01_input/untrimmed_fastq
+OUT=../03_output/trimmed_reads
+mkdir -p $OUT
+for infile in $IN/*_1.fastq.gz
+do
+   accession=$(basename $infile _1.fastq.gz)
+   echo "processing accession $accession" 
+   trimmomatic PE \
+       $IN/${accession}_1.fastq.gz      $IN/${accession}_2.fastq.gz \
+       $OUT/${accession}_1.trim.fastq.gz $OUT/${accession}_1un.trim.fastq.gz \
+       $OUT/${accession}_2.trim.fastq.gz $OUT/${accession}_2un.trim.fastq.gz \
+       SLIDINGWINDOW:4:20 \
+       MINLEN:25 \
+       ILLUMINACLIP:$adapters_fa:2:40:15
 done
 ~~~
 {: .bash}
