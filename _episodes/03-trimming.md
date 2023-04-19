@@ -66,7 +66,7 @@ Two important parameters that we'll use to keep our data organized in our direct
 
 | option    | meaning |
 | ------- | ---------- |
-|  -basein \<inputBase> | This will automatically prepend our *input* file names with a value. Ours is `-basein ../01_input`|
+|  -basein \<inputBase> | This will automatically prepend our *input* file names with a value. Ours is `-basein ../01_input/untrimmed_fastq/`|
 |  -baseout \<outputBase> | This will automatically prepend our *output* file names with a value. Ours is `-baseout ../03_output`|
 
 The last thing trimmomatic expects to see is the trimming parameters:
