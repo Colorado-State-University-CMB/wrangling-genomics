@@ -475,27 +475,6 @@ Trimmomatic to run for each of our six input files. Once it is done
 running, take a look at your directory contents. You will notice that even though we ran Trimmomatic on file `SRR2589044` before running the for loop, there is only one set of files for it. Because we matched the ending `_1.fastq.gz`, we re-ran Trimmomatic on this file, overwriting our first results. That is ok, but it is good to be aware that it happened.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/trimmed_fastq
-ls
-~~~
-{: .bash}
-
-~~~
-NexteraPE-PE.fa               SRR2584866_1.fastq.gz         SRR2589044_1.trim.fastq.gz
-SRR2584863_1.fastq.gz         SRR2584866_1.trim.fastq.gz    SRR2589044_1un.trim.fastq.gz
-SRR2584863_1.trim.fastq.gz    SRR2584866_1un.trim.fastq.gz  SRR2589044_2.fastq.gz
-SRR2584863_1un.trim.fastq.gz  SRR2584866_2.fastq.gz         SRR2589044_2.trim.fastq.gz
-SRR2584863_2.fastq.gz         SRR2584866_2.trim.fastq.gz    SRR2589044_2un.trim.fastq.gz
-SRR2584863_2.trim.fastq.gz    SRR2584866_2un.trim.fastq.gz
-SRR2584863_2un.trim.fastq.gz  SRR2589044_1.fastq.gz
-~~~
-{: .output}
-
-We have now completed the trimming and filtering steps of our quality
-control process! Before we move on, let's move our trimmed FASTQ files
-to a new subdirectory within our `data/` directory.
-
-~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
 cd ../03_output/trimmed_fastq
 ls
@@ -503,14 +482,56 @@ ls
 {: .bash}
 
 ~~~
-SRR2584863_1.trim.fastq.gz    SRR2584866_1.trim.fastq.gz    SRR2589044_1.trim.fastq.gz
-SRR2584863_1un.trim.fastq.gz  SRR2584866_1un.trim.fastq.gz  SRR2589044_1un.trim.fastq.gz
-SRR2584863_2.trim.fastq.gz    SRR2584866_2.trim.fastq.gz    SRR2589044_2.trim.fastq.gz
-SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.fastq.gz
+SRR2584863_1.trim.fastq.gz    SRR2584863_2un.trim.fastq.gz  SRR2584866_2.trim.fastq.gz    SRR2589044_1un.trim.fastq.gz
+SRR2584863_1un.trim.fastq.gz  SRR2584866_1.trim.fastq.gz    SRR2584866_2un.trim.fastq.gz  SRR2589044_2.trim.fastq.gz
+SRR2584863_2.trim.fastq.gz    SRR2584866_1un.trim.fastq.gz  SRR2589044_1.trim.fastq.gz    SRR2589044_2un.trim.fastq.gz
 ~~~
 {: .output}
 
+
 ## optional - array version
+
+
+~~~
+#!/usr/bin/env bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=4
+#SBATCH --time=0:02:00
+#SBATCH --partition=amilan
+#SBATCH --qos=normal
+#SBATCH --job-name=trimmomatic
+# to submit this script, you do sbatch --array=0-2 trimmomatic.sbatch
+source /curc/sw/anaconda3/latest
+conda activate qc-trim
+adapters_fa=../01_input/untrimmed_fastq/NexteraPE-PE.fa
+IN=../01_input/untrimmed_fastq
+OUT=../03_output/trimmed_reads
+mkdir -p $OUT
+infiles=( $IN/*_1.fastq.gz )
+infile=${infiles[$SLURM_ARRAY_TASK_ID]}
+accession=$(basename $infile _1.fastq.gz)
+echo "processing accession $accession" 
+trimmomatic PE \
+   -threads $SLURM_NTASKS\
+   $IN/${accession}_1.fastq.gz      $IN/${accession}_2.fastq.gz \
+   $OUT/${accession}_1.trim.fastq.gz $OUT/${accession}_1un.trim.fastq.gz \
+   $OUT/${accession}_2.trim.fastq.gz $OUT/${accession}_2un.trim.fastq.gz \
+   SLIDINGWINDOW:4:20 \
+   MINLEN:25 \
+   ILLUMINACLIP:$adapters_fa:2:40:15
+~~~
+{: .bash}
+
+~~~
+sbatch --array=0-2 trimmomatic.sbatch
+~~~
+{: .bash}
+
+~~~
+Submitted batch job 1141362
+~~~
+{: .output}
+
 
 Checking job status:
 
