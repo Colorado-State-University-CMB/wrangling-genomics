@@ -318,7 +318,7 @@ conda activate qc-trim
 adapters_fa=../01_input/NexteraPE-PE.fa
 
 trimmomatic PE \
-   -basein ../01_input\
+   -basein ../01_input/untrimmed_fastq/\
    -baseout ../03_output\
    SRR2589044_1.fastq.gz      SRR2589044_2.fastq.gz \
    SRR2589044_1.trim.fastq.gz SRR2589044_1un.trim.fastq.gz \
