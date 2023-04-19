@@ -510,5 +510,50 @@ SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.
 ~~~
 {: .output}
 
+## optional - array version
+
+Checking job status:
+
+~~~
+sq
+~~~
+{: .bash}
+
+Array job pending:
+
+~~~
+Tue Apr 18 22:01:59 2023
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+     1141362_[0-2]    amilan trimmoma dcking@c PD       0:00      1 (Priority)
+~~~
+{: .output}
+
+Array job running:
+
+~~~
+Tue Apr 18 22:02:19 2023
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+         1141362_0    amilan trimmoma dcking@c  R       0:09      1 c3cpu-c11-u1-3
+         1141362_1    amilan trimmoma dcking@c  R       0:09      1 c3cpu-c11-u1-3
+         1141362_2    amilan trimmoma dcking@c  R       0:09      1 c3cpu-c11-u1-3
+~~~
+{: .output}
+
+Comparison between single job, 4-6 threads, and array job, 4 threads:
+
+~~~
+sa
+~~~
+{: .bash}
+
+~~~
+1141352      trimmomat+          4  COMPLETED      0:0   00:02:07   00:10:00 2023-04-18T21:51:20 2023-04-18T21:51:43 2023-04-18T21:53:50 
+1141360      trimmomat+          6  COMPLETED      0:0   00:01:58   00:10:00 2023-04-18T21:54:19 2023-04-18T21:55:17 2023-04-18T21:57:15 
+1141362_0    trimmomat+          4  COMPLETED      0:0   00:00:44   00:02:00 2023-04-18T22:01:15 2023-04-18T22:02:10 2023-04-18T22:02:54 
+1141362_1    trimmomat+          4  COMPLETED      0:0   00:01:00   00:02:00 2023-04-18T22:01:15 2023-04-18T22:02:10 2023-04-18T22:03:10 
+1141362_2    trimmomat+          4  COMPLETED      0:0   00:00:29   00:02:00 2023-04-18T22:01:15 2023-04-18T22:02:10 2023-04-18T22:02:39 
+~~~
+{: .output}
+
 ## Maintain data integrity with checksums
 
