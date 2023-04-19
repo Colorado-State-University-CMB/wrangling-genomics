@@ -318,6 +318,8 @@ conda activate qc-trim
 adapters_fa=../01_input/NexteraPE-PE.fa
 
 trimmomatic PE \
+   -basein ../01_input\
+   -baseout ../03_output\
    SRR2589044_1.fastq.gz      SRR2589044_2.fastq.gz \
    SRR2589044_1.trim.fastq.gz SRR2589044_1un.trim.fastq.gz \
    SRR2589044_2.trim.fastq.gz SRR2589044_2un.trim.fastq.gz \
@@ -340,6 +342,8 @@ trimmomatic PE \
 > # prints: processing accession SRR2589044
 > # replace all previous occurrences of SRR2589044 with ${accession}
 > trimmomatic PE \
+>  -basein ../01_input\
+>  -baseout ../03_output\
 >   ${accession}_1.fastq.gz      ${accession}_2.fastq.gz \
 >   ${accession}_1.trim.fastq.gz ${accession}_1un.trim.fastq.gz \
 >   ${accession}_2.trim.fastq.gz ${accession}_2un.trim.fastq.gz \
