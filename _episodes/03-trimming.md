@@ -418,31 +418,15 @@ double-check this or to enter the quality encoding manually.
 We can confirm that we have our output files:
 
 ~~~
-$ ls SRR2589044*
+ls ../03_output/trimmed_reads/SRR2589044* -l -h
 ~~~
 {: .bash}
 
 ~~~
-SRR2589044_1.fastq.gz       SRR2589044_1un.trim.fastq.gz  SRR2589044_2.trim.fastq.gz
-SRR2589044_1.trim.fastq.gz  SRR2589044_2.fastq.gz         SRR2589044_2un.trim.fastq.gz
-~~~
-{: .output}
-
-The output files are also FASTQ files. It should be smaller than our
-input file, because we have removed reads. We can confirm this:
-
-~~~
-$ ls SRR2589044* -l -h
-~~~
-{: .bash}
-
-~~~
--rw-rw-r-- 1 dcuser dcuser 124M Jul  6 20:22 SRR2589044_1.fastq.gz
--rw-rw-r-- 1 dcuser dcuser  94M Jul  6 22:33 SRR2589044_1.trim.fastq.gz
--rw-rw-r-- 1 dcuser dcuser  18M Jul  6 22:33 SRR2589044_1un.trim.fastq.gz
--rw-rw-r-- 1 dcuser dcuser 128M Jul  6 20:24 SRR2589044_2.fastq.gz
--rw-rw-r-- 1 dcuser dcuser  91M Jul  6 22:33 SRR2589044_2.trim.fastq.gz
--rw-rw-r-- 1 dcuser dcuser 271K Jul  6 22:33 SRR2589044_2un.trim.fastq.gz
+-rw-r--r--. 1 dcking@colostate.edu dckingpgrp@colostate.edu  94M Apr 18 21:28 ../03_output/trimmed_reads/SRR2589044_1.trim.fastq.gz
+-rw-r--r--. 1 dcking@colostate.edu dckingpgrp@colostate.edu  18M Apr 18 21:28 ../03_output/trimmed_reads/SRR2589044_1un.trim.fastq.gz
+-rw-r--r--. 1 dcking@colostate.edu dckingpgrp@colostate.edu  91M Apr 18 21:28 ../03_output/trimmed_reads/SRR2589044_2.trim.fastq.gz
+-rw-r--r--. 1 dcking@colostate.edu dckingpgrp@colostate.edu 271K Apr 18 21:28 ../03_output/trimmed_reads/SRR2589044_2un.trim.fastq.gz
 ~~~
 {: .output}
 
@@ -452,13 +436,6 @@ However, there is some bad news. Trimmomatic can only operate on
 one sample at a time and we have more than one sample. The good news
 is that we can use a `for` loop to iterate through our sample files
 quickly! 
-
-We unzipped one of our files before to work with it, let's compress it again before we run our for loop.
-
-~~~
-gzip SRR2584863_1.fastq 
-~~~
-{: .bash}
 
 ~~~
 #!/usr/bin/env bash
