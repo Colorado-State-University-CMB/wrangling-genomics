@@ -352,6 +352,18 @@ trimmomatic PE \
 >
 {: .callout}
 
+Run either version of the previous script:
+~~~
+sbatch trimmomatic.sbatch
+~~~
+{: .bash}
+
+~~~
+Submitted batch job 1141244
+~~~
+{: .output}
+
+
 The output from trimmomatic is like this:
 
 ~~~
