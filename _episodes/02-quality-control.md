@@ -607,9 +607,9 @@ source /curc/sw/anaconda3/latest
 
 conda activate qc-trim
 
-mkdir -p ../03_output/fastqc_untrimmed_reads
+mkdir -p ../03_output/fastqc_reports
 
-fastqc -o ../03_output/fastqc_untrimmed_reads -t $SLURM_NTASKS ../01_input/untrimmed_fastq/*.fastq
+fastqc -o ../03_output/fastqc_reports -t $SLURM_NTASKS ../01_input/untrimmed_fastq/*.fastq
 
 ~~~
 {: .bash}
@@ -658,12 +658,11 @@ $
 ~~~
 {: .output}
 
-The FastQC program has created several new files within our
-`data/untrimmed_fastq/` directory.
+
 
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output
-ls fastqc_untrimmed_reads/
+ls fastqc_repports/
 ~~~
 {: .bash}
 
@@ -745,7 +744,7 @@ our `.zip` files and unzip them. Let's see what that looks like and then we will
 discuss what we are doing with each line of our loop.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_reports
 for filename in *.zip
 > do
 > unzip $filename
@@ -816,7 +815,7 @@ The `.html` files and the uncompressed `.zip` files are still present,
 see for sure that it is a directory if we use the `-F` flag for `ls`. 
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_reports
 ls -F
 ~~~
 {: .bash}
@@ -834,7 +833,7 @@ SRR2584863_2_fastqc.zip   SRR2584866_2_fastqc.zip   SRR2589044_2_fastqc.zip
 Let's see what files are present within one of these output directories.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_reports
 ls -F SRR2584863_1_fastqc/
 ~~~
 {: .bash}
@@ -847,7 +846,7 @@ fastqc_data.txt  fastqc.fo  fastqc_report.html	Icons/	Images/  summary.txt
 Use `less` to preview the `summary.txt` file for this sample.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_reports
 less SRR2584863_1_fastqc/summary.txt
 ~~~
 {: .bash}
@@ -879,7 +878,7 @@ using the `cat` command. We will call this `fastqc_summaries.txt` and move
 it to `fastqc_summaries.txt`.
 
 ~~~
-# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_untrimmed_reads
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/03_output/fastqc_reports
 cat */summary.txt > ../fastqc_summaries.txt
 cd ..
 ls
