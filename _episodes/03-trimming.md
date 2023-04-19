@@ -316,13 +316,14 @@ source /curc/sw/anaconda3/latest
 conda activate qc-trim
 
 adapters_fa=../01_input/NexteraPE-PE.fa
+IN=../01_input/untrimmed_fastq
+OUT=../03_output/trimmed_reads
+mkdir -p $OUT
 
 trimmomatic PE \
-   -basein ../01_input/untrimmed_fastq/\
-   -baseout ../03_output\
-   SRR2589044_1.fastq.gz      SRR2589044_2.fastq.gz \
-   SRR2589044_1.trim.fastq.gz SRR2589044_1un.trim.fastq.gz \
-   SRR2589044_2.trim.fastq.gz SRR2589044_2un.trim.fastq.gz \
+  $IN/SRR2589044_1.fastq.gz      $IN/SRR2589044_2.fastq.gz \
+   $OUT/SRR2589044_1.trim.fastq.gz $OUT/SRR2589044_1un.trim.fastq.gz \
+   $OUT/SRR2589044_2.trim.fastq.gz $OUT/SRR2589044_2un.trim.fastq.gz \
    SLIDINGWINDOW:4:20 \
    MINLEN:25 \
    ILLUMINACLIP:$adapters_fa:2:40:15
@@ -335,6 +336,7 @@ trimmomatic PE \
 > when you want to change your script to work on a different value, that value
 > only needs to be changed in one place. 
 > ~~~
+> 
 > filename=SRR2589044_1.fastq.gz # want to remove "_1.fastq.gz" 
 > accession=$(basename $filename _1.fastq.gz}
 >                                   
@@ -342,11 +344,10 @@ trimmomatic PE \
 > # prints: processing accession SRR2589044
 > # replace all previous occurrences of SRR2589044 with ${accession}
 > trimmomatic PE \
->  -basein ../01_input\
->  -baseout ../03_output\
->   ${accession}_1.fastq.gz      ${accession}_2.fastq.gz \
->   ${accession}_1.trim.fastq.gz ${accession}_1un.trim.fastq.gz \
->   ${accession}_2.trim.fastq.gz ${accession}_2un.trim.fastq.gz \
+>  
+>   $IN/${accession}_1.fastq.gz      $IN/${accession}_2.fastq.gz \
+>   $OUT/${accession}_1.trim.fastq.gz $OUT/${accession}_1un.trim.fastq.gz \
+>   $OUT/${accession}_2.trim.fastq.gz $OUT/${accession}_2un.trim.fastq.gz \
 >   SLIDINGWINDOW:4:20 \
 >   MINLEN:25 \
 >   ILLUMINACLIP:$adapters_fa:2:40:15
