@@ -578,3 +578,48 @@ sa
 
 ## Maintain data integrity with checksums
 
+
+~~~
+md5sum * > checksum.md5
+cat checksum.md5
+~~~
+{: .bash}
+
+~~~
+ada4ddd4e2f02671786491a793d3b380  SRR2584863_1.trim.fastq.gz
+50045bcaab602667a95f53870002e68d  SRR2584863_1un.trim.fastq.gz
+7c22ca7cd60030160f6425d9e6bc75ea  SRR2584863_2.trim.fastq.gz
+c6314804acac3a013f951d6fb6fe2d52  SRR2584863_2un.trim.fastq.gz
+9bf83b31d7882f637f57d0ecac2e288f  SRR2584866_1.trim.fastq.gz
+57ed6d9cf50697693127c76d41ec074e  SRR2584866_1un.trim.fastq.gz
+e6cd3bdc17af0b5779fb3f40ff8e280e  SRR2584866_2.trim.fastq.gz
+84ad1a8cd661253c25a653c3cb5b364b  SRR2584866_2un.trim.fastq.gz
+e029c09c402be9e8d9703ebd74c6b5b0  SRR2589044_1.trim.fastq.gz
+c5d43e3d4ae406b34019cf290c795f9e  SRR2589044_1un.trim.fastq.gz
+7d29399f60affb38e3439d3132857363  SRR2589044_2.trim.fastq.gz
+375e9041a385a39571ac0672e4ed764c  SRR2589044_2un.trim.fastq.gz
+~~~
+{: .output}
+
+~~~
+md5sum -c checksum.md5
+~~~
+{: .bash}
+
+~~~
+SRR2584863_1.trim.fastq.gz: OK
+SRR2584863_1un.trim.fastq.gz: OK
+SRR2584863_2.trim.fastq.gz: OK
+SRR2584863_2un.trim.fastq.gz: OK
+SRR2584866_1.trim.fastq.gz: OK
+SRR2584866_1un.trim.fastq.gz: OK
+SRR2584866_2.trim.fastq.gz: OK
+SRR2584866_2un.trim.fastq.gz: OK
+SRR2589044_1.trim.fastq.gz: OK
+SRR2589044_1un.trim.fastq.gz: OK
+SRR2589044_2.trim.fastq.gz: OK
+SRR2589044_2un.trim.fastq.gz: OK
+~~~
+{: .output}
+
+
