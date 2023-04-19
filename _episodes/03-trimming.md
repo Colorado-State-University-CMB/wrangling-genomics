@@ -488,6 +488,41 @@ SRR2584863_2.trim.fastq.gz    SRR2584866_1un.trim.fastq.gz  SRR2589044_1.trim.fa
 ~~~
 {: .output}
 
+## make use of multiple threads
+
+Notice the addition of `-threads`, passing it the value of $SLURM_NTASKS.
+
+You can change --ntasks=2. Try 4, or 6. 
+
+~~~
+#!/usr/bin/env bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --time=0:10:00
+#SBATCH --partition=amilan
+#SBATCH --qos=normal
+#SBATCH --job-name=trimmomatic
+source /curc/sw/anaconda3/latest
+conda activate qc-trim
+adapters_fa=../01_input/untrimmed_fastq/NexteraPE-PE.fa
+IN=../01_input/untrimmed_fastq
+OUT=../03_output/trimmed_reads
+mkdir -p $OUT
+for infile in $IN/*_1.fastq.gz
+do
+   accession=$(basename $infile _1.fastq.gz)
+   echo "processing accession $accession" 
+   trimmomatic PE \
+       -threads $SLURM_NTASKS\
+       $IN/${accession}_1.fastq.gz      $IN/${accession}_2.fastq.gz \
+       $OUT/${accession}_1.trim.fastq.gz $OUT/${accession}_1un.trim.fastq.gz \
+       $OUT/${accession}_2.trim.fastq.gz $OUT/${accession}_2un.trim.fastq.gz \
+       SLIDINGWINDOW:4:20 \
+       MINLEN:25 \
+       ILLUMINACLIP:$adapters_fa:2:40:15
+done
+~~~
+{: .bash}
 
 ## optional - array version
 
