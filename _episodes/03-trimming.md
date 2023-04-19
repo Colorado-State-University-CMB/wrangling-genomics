@@ -136,7 +136,8 @@ Absolute paths fully describe the
 location of a file or directory, and are valid regardless of your current working directory. You can identify an absolute path because it always starts with a `/`. We have mainly dealt with *relative paths* so far, which can contain slashes, but never at the very beginning.
 
 ~~~
-# don't need to be in a specific directory
+# don't need to be in a particular directory, but need env:
+# conda activate qc-trim
 echo $CONDA_PREFIX
 ~~~
 {: .bash}
@@ -151,7 +152,8 @@ This is a subdirectory of my /projects directory that is just for the environmen
 will be in here.  Let's explore it. *Yours may differ for some packages*
 
 ~~~
-# don't need to be in a specific directory
+# don't need to be in a particular directory, but need env:
+# conda activate qc-trim
 ls $CONDA_PREFIX
 ~~~
 {: .bash}
@@ -166,7 +168,8 @@ compiler_compat  conf        fonts  jmods    lib    man      release  ssl    x86
 Installed programs are in `bin`, whereas installed data is typical in `share`.
 
 ~~~
-# don't need to be in a specific directory
+# don't need to be in a particular directory, but need env:
+# conda activate qc-trim
 ls $CONDA_PREFIX/share
 ~~~
 {: .bash}
@@ -208,7 +211,8 @@ drwxr-xr-x. 19 dcking@colostate.edu erinnishgrp@colostate.edu 1590 Apr 16 19:57 
 Explore `trimmomatic`
 
 ~~~
-# don't need to be in a specific directory
+# don't need to be in a particular directory, but need env:
+# conda activate qc-trim
 ls $CONDA_PREFIX/share/trimmomatic
 ~~~
 {: .bash}
@@ -219,7 +223,8 @@ adapters  build_env_setup.sh  conda_build.sh  LICENSE  metadata_conda_debug.yaml
 {: .output}
 
 ~~~
-# don't need to be in a specific directory
+# don't need to be in a particular directory, but need env:
+# conda activate qc-trim
 ls $CONDA_PREFIX/share/trimmomatic/adapters
 ~~~
 {: .bash}
@@ -232,7 +237,8 @@ NexteraPE-PE.fa  TruSeq2-PE.fa  TruSeq2-SE.fa  TruSeq3-PE-2.fa  TruSeq3-PE.fa  T
 **WE FOUND IT**
 The adapter sequences are just short fasta format sequences
 ~~~
-# don't need to be in a specific directory
+# don't need to be in a particular directory, but need env:
+# conda activate qc-trim
 cat $CONDA_PREFIX/share/trimmomatic/adapters/NexteraPE-PE.fa 
 ~~~
 {: .bash}
