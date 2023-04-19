@@ -329,6 +329,17 @@ trimmomatic PE \
    ILLUMINACLIP:$adapters_fa:2:40:15
 ~~~
 {: .bash}
+
+Run the script:
+~~~
+sbatch trimmomatic.sbatch
+~~~
+{: .bash}
+
+~~~
+Submitted batch job 1141244
+~~~
+{: .output}
  
 > ## Using variables and string functions to generalize a script
 > You can generalize your script by replacing explicit values in your
@@ -344,7 +355,6 @@ trimmomatic PE \
 > # prints: processing accession SRR2589044
 > # replace all previous occurrences of SRR2589044 with ${accession}
 > trimmomatic PE \
->  
 >   $IN/${accession}_1.fastq.gz      $IN/${accession}_2.fastq.gz \
 >   $OUT/${accession}_1.trim.fastq.gz $OUT/${accession}_1un.trim.fastq.gz \
 >   $OUT/${accession}_2.trim.fastq.gz $OUT/${accession}_2un.trim.fastq.gz \
@@ -357,19 +367,19 @@ trimmomatic PE \
 >
 {: .callout}
 
-Run either version of the previous script:
+Run the script:
 ~~~
 sbatch trimmomatic.sbatch
 ~~~
 {: .bash}
 
 ~~~
-Submitted batch job 1141244
+Submitted batch job 1141303
 ~~~
 {: .output}
 
 
-The output from trimmomatic is like this:
+The output from trimmomatic is will be in a log file (slurm-1141303.out) like this:
 
 ~~~
 TrimmomaticPE: Started with arguments:
