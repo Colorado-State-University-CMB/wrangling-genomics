@@ -343,6 +343,8 @@ Submitted batch job 1141244
 ~~~
 {: .output}
  
+#### Script: 2nd approach uses "accession" but only does one sample
+
 > ## Using variables and string functions to generalize a script
 > You can generalize your script by replacing explicit values in your
 > code with that of a variable. You set the variable before using it, so, 
@@ -439,6 +441,8 @@ one sample at a time and we have more than one sample. The good news
 is that we can use a `for` loop to iterate through our sample files
 quickly! 
 
+#### Script version 3: add a loop to handle all samples in one job
+
 ~~~
 #!/usr/bin/env bash
 #SBATCH --nodes=1
@@ -496,6 +500,8 @@ Notice the addition of `-threads`, passing it the value of $SLURM_NTASKS.
 
 You can change --ntasks=2. Try 4, or 6. 
 
+#### Script version 3.5: loop approach but with -threads
+
 ~~~
 #!/usr/bin/env bash
 #SBATCH --nodes=1
@@ -528,6 +534,7 @@ done
 
 ## optional - array version
 
+#### Script version 4: one job per sample in an array
 
 ~~~
 #!/usr/bin/env bash
