@@ -300,6 +300,8 @@ to run properly.
 
 This command will take a few minutes to run. ***(faster on Alpine)***
 
+#### Script version 1
+
 Make a script called `trimmomatic.sbatch`.
 
 ~~~
@@ -315,9 +317,9 @@ source /curc/sw/anaconda3/latest
 
 conda activate qc-trim
 
-adapters_fa=../01_input/NexteraPE-PE.fa
 IN=../01_input/untrimmed_fastq
 OUT=../03_output/trimmed_reads
+adapters_fa=$IN/NexteraPE-PE.fa
 mkdir -p $OUT
 
 trimmomatic PE \
