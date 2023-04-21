@@ -314,6 +314,11 @@ programs, we have to have qc-trim activated first.
 ### Alignment and variant calling
 
 ```
+conda create -n vcf bwa samtools bcftools
+```
+Or if that doesn't work, do:
+
+```
 conda create env -n vcf bwa samtools bcftools
 ```
 
