@@ -807,3 +807,40 @@ ls: cannot access ../01_input/untrimmed_fastq/_2.fastq: No such file or director
 {: .output}
 
 
+### Interactive compute session with `ainteractive`
+
+```
+(base) [dcking@colostate.edu@login12 02_scripts]$ ainteractive
+```
+{: .bash}
+
+```
+ainteractive: submitting job... salloc --nodes=1 --ntasks=1  --partition=ainteractive --time=1:00:00  --bell srun --pty /bin/bash
+salloc: Granted job allocation 1158992
+salloc: Waiting for resource configuration
+salloc: Nodes c3cpu-a7-u34-2 are ready for job
+(base) [dcking@colostate.edu@c3cpu-a7-u34-2 02_scripts]$
+```
+{: .output}
+
+You can now test your script using `bash scriptname` instead of `sbatch scriptname` and get your output to the screen.
+
+Benefits:
+ - waiting in the queue with full resource requests
+ - waiting for your job to complete
+ - output to your screen instead of looking for the slurm-123456.out file
+ - faster edit/test pace
+
+Once you have your script running properly, finding all of the files, etc., then you can exit the interactive session.
+
+```
+(base) [dcking@colostate.edu@c3cpu-a7-u34-2 02_scripts]$ exit
+```
+{: .bash}
+
+```
+exit
+salloc: Relinquishing job allocation 1158992
+(base) [dcking@colostate.edu@login12 02_scripts]$
+```
+{: .output}
