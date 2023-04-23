@@ -683,7 +683,7 @@ conda install tree
 ![directory structure](../img/vcf_workflow_dirstructure.png)
 
 
-### verify paths using `ls`
+#### verify paths using `ls`
 
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
@@ -721,6 +721,7 @@ ls $IN/*.fastq
 ~~~
 {: .output}
 
+#### try `basename` on paths and file extensions
 
 Isolate the file part of a path with `basename path`.
 
@@ -748,7 +749,7 @@ SRR2589044
 {: .output}
 
 
-Remove both the leading directories AND the file extension:
+Remove both the leading directories AND the file extension at the same time.
 
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
