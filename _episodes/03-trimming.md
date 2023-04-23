@@ -668,4 +668,5 @@ SRR2589044_2un.trim.fastq.gz: OK
 
 ## Debugging
 
-[directory structure](../img/vcf_workflow_dirstructure.png)
+![directory structure](../img/vcf_workflow_dirstructure.png)
+
