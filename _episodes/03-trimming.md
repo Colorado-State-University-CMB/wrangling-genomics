@@ -666,7 +666,7 @@ SRR2589044_2un.trim.fastq.gz: OK
 ~~~
 {: .output}
 
-## Debugging and troubleshooting
+## Debugging and troubleshooting on the command line
 
 
 #### Install `tree`. 
@@ -682,7 +682,8 @@ conda install tree
 
 ![directory structure](../img/vcf_workflow_dirstructure.png)
 
-Try the path statements on the command line.
+
+### verify paths using `ls`
 
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
@@ -707,3 +708,57 @@ ls $adapters_fa
 ../01_input/untrimmed_fastq/NexteraPE-PE.fa
 ~~~
 {: .output}
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+ls $IN/*.fastq
+~~~
+{: .bash}
+
+~~~
+../01_input/untrimmed_fastq/SRR2584863_1.fastq  ../01_input/untrimmed_fastq/SRR2584866_1.fastq  ../01_input/untrimmed_fastq/SRR2589044_1.fastq
+../01_input/untrimmed_fastq/SRR2584863_2.fastq  ../01_input/untrimmed_fastq/SRR2584866_2.fastq  ../01_input/untrimmed_fastq/SRR2589044_2.fastq
+~~~
+{: .output}
+
+
+Isolate the file part of a path with `basename path`.
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+basename $IN/SRR2589044_1.fastq 
+~~~
+{: .bash}
+
+~~~
+SRR2589044_1.fastq
+~~~
+{: .output}
+
+Remove a suffix or extension of a filename with `basename filename.ext .ext`
+
+~~~
+basename SRR2589044_1.fastq  _1.fastq
+~~~
+{: .bash}
+
+~~~
+SRR2589044
+~~~
+{: .output}
+
+
+Remove both the leading directories AND the file extension:
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+basename $IN/SRR2589044_1.fastq  _1.fastq
+~~~
+{: .bash}
+
+~~~
+SRR2589044
+~~~
+{: .output}
+ 
+ 
