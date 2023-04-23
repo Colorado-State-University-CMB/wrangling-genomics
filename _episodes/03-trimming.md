@@ -666,7 +666,44 @@ SRR2589044_2un.trim.fastq.gz: OK
 ~~~
 {: .output}
 
-## Debugging
+## Debugging and troubleshooting
+
+
+#### Install `tree`. 
+
+You can't install into base: use one of your environments.
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+conda activate qc-trim
+conda install tree
+~~~
+{: .bash}
 
 ![directory structure](../img/vcf_workflow_dirstructure.png)
 
+Try the path statements on the command line.
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+IN=../01_input/untrimmed_fastq
+ls $IN
+~~~
+{: .bash}
+
+~~~
+NexteraPE-PE.fa  SRR2584863_1.fastq  SRR2584863_2.fastq  SRR2584866_1.fastq  SRR2584866_2.fastq  SRR2589044_1.fastq  SRR2589044_2.fastq
+~~~
+{: .output}
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+adapters_fa=$IN/NexteraPE-PE.fa
+ls $adapters_fa
+~~~
+{: .bash}
+
+~~~
+../01_input/untrimmed_fastq/NexteraPE-PE.fa
+~~~
+{: .output}
