@@ -762,4 +762,48 @@ SRR2589044
 ~~~
 {: .output}
  
- 
+#### test more statements from the script
+
+The output from the string functions must be stored if we plan to modify them in order to form new filenames.
+
+`savedoutput=$( command )`
+
+```
+filename=SRR2589044_1.fastq
+accession=$(basename $filename _1.fastq)
+echo $filename
+echo $accession
+```
+{: .bash}
+
+```
+SRR2589044_1.fastq
+SRR2589044
+```
+{: output}
+
+```
+ls $IN/${accession}_2.fastq
+```
+{: .bash}
+
+```
+../01_input/untrimmed_fastq/SRR2589044_2.fastq
+```
+{: .output}
+
+Notice that we referred to `_2.fastq`, but we got the accession ID from the corresponding `_1.fastq`.
+
+When there's an error (accession mispelled/typo):
+
+```
+ls $IN/${acession}_2.fastq
+```
+{: .bash}
+
+```
+ls: cannot access ../01_input/untrimmed_fastq/_2.fastq: No such file or directory
+```
+{: .output}
+
+
