@@ -844,3 +844,43 @@ salloc: Relinquishing job allocation 1158992
 (base) [dcking@colostate.edu@login12 02_scripts]$
 ```
 {: .output}
+
+### Bash settings and flags for debugging
+
+These commands can go after the #SBATCH headers
+
+`set -e` : quit on first error
+
+`set -u` : quit if an unset variable is accessed - for example `${acession}` when `accession` is variable you set
+
+#### From the command line
+
+`bash -n scriptname`: don't run the script, but check for syntax errors
+
+If you are in ainteractive and are testing with `bash scriptname` instead of `sbatch scriptname`:
+
+`bash -v scriptname`: print out each line as it executes.
+
+`bash -x scriptname`: like `-v`, but expands commands. (I find this output difficult to read).
+
+### General tips
+
+Use lots of echo statements ***in the script*** to check variables
+
+```
+echo "accession is set to $accession"
+```
+{:  .bash}
+
+```
+echo "IN is set to $IN"
+echo "listing IN ($IN):"
+ls $IN
+```
+{: .bash}
+
+```
+listing IN (../01_input/untrimmed_fastq):
+NexteraPE-PE.fa  SRR2584863_1.fastq  SRR2584863_2.fastq  SRR2584866_1.fastq  SRR2584866_2.fastq  SRR2589044_1.fastq  SRR2589044_2.fastq
+```
+{: .output}
