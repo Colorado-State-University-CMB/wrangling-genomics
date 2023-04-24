@@ -25,7 +25,7 @@ There is no output. You maybe submit this script as-is to process a subsampled d
 
 ### In an interactive compute session (ainteractive)
 
-We will download and index the `E. coli` genome in an interactive compute session using `align_and_vcf.sbatch`.
+We will download and index the _E. coli_ genome in an interactive compute session using `align_and_vcf.sbatch`.
 ~~~
 (base) [dcking@colostate.edu@login12 02_scripts]$ ainteractive
 ~~~
@@ -96,7 +96,7 @@ You must do three things:
  1. comment out the part in the box
  2. edit the script to use a threads argument:
     - example: command_name -t $SLURM_NTASKS
-    - the commands make us of an argument are `bwa`, `samtools`, and `bcftools`
+    - the commands that make use of an argument are `bwa`, `samtools`, and `bcftools`
  3. edit the script to use your trimmed fastq files
  4. See how fast you can get your script to finish by increasing ntasks
 
