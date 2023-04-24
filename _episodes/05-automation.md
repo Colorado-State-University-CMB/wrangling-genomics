@@ -69,7 +69,6 @@ bash align_and_vcf.sbatch
 {: .bash}
 
 ~~~
-bash align_and_vcf.sbatch 
 ALIGN, COVERAGE AND VARIANT CALLING PIPELINE!
 Starting... Sun Apr 23 22:11:42 MDT 2023
 ------------------------------------------------------------------
