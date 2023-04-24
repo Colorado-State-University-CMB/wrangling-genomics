@@ -11,6 +11,34 @@ keypoints:
 - "We can combine multiple commands into a shell script to automate a workflow."
 - "Use `echo` statements within your scripts to get an automated progress update."
 ---
+
+Setup
+
+~~~
+# cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
+git pull
+cp ../.templates/align_and_vcf_template.sbatch ./align_and_vcf.sbatch
+~~~
+{: .bash}
+
+There is no output. You maybe submit this script as is to process a subsampled dataset.
+
+Look at the data being produced. Look at the log files being created. Figure out what it's doing.
+
+You must do three things:
+ 1. edit the script to use your output files
+ 2. edit the script to use a threads argument:
+    - example: command_name -t $SLURM_NTASKS
+    - the commands make us of an argument are `bwa`, `samtools`, and `bcftools`
+ 3. See how fast you can get your script to finish
+
+
+END OF CM580A3 LESSON
+END OF CM580A3 LESSON
+END OF CM580A3 LESSON
+END OF CM580A3 LESSON
+END OF CM580A3 LESSON
+---
 # What is a shell script?
 
 You wrote a simple shell script in a [previous lesson](http://www.datacarpentry.org/shell-genomics/05-writing-scripts/) that we used to extract bad reads from our
