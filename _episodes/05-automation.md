@@ -25,6 +25,8 @@ There is no output. You maybe submit this script as-is to process a subsampled d
 
 ### In an interactive compute session (ainteractive)
 
+
+
 We will download and index the _E. coli_ genome in an interactive compute session using `align_and_vcf.sbatch`.
 ~~~
 (base) [dcking@colostate.edu@login12 02_scripts]$ ainteractive
@@ -39,6 +41,8 @@ salloc: Nodes c3cpu-a7-u34-2 are ready for job
 (base) [dcking@colostate.edu@c3cpu-a7-u34-2 02_scripts]$
 ~~~
 {: .output}
+
+Notice the arguments: ` --nodes=1 --ntasks=1  --partition=ainteractive --time=1:00:00`. The `ainteractive` sessions are meant to use minimal resources.  We will make changes to the script to get it running, but then leave ainteractive and submit the script using sbatch.
 
 The initial part of the script only needs to run once, so we will comment it out after we run it.
 
@@ -89,16 +93,15 @@ INDEXING GENOME... [bwa_index] Pack FASTA... 0.03 sec
 {: .output}
 
 
-Look at the data being produced. Look at the log files being created. Figure out what it's doing.
-
 You must do three things:
  1. comment out the part in the box
  2. edit the script to use a threads argument:
     - example: command_name -t $SLURM_NTASKS
     - the commands that make use of an argument are `bwa`, `samtools`, and `bcftools`
  3. edit the script to use your trimmed fastq files
- 4. See how fast you can get your script to finish by increasing ntasks
+ 4. Using sbatch (not ainteractive), see how fast you can get your script to finish by increasing ntasks
 
+Look at the data being produced. Look at the log files being created. Figure out what it's doing.
 
 
 END OF CM580A3 LESSON
