@@ -482,7 +482,7 @@ running, take a look at your directory contents. You will notice that even thoug
 
 ~~~
 # cd /projects/$USER/CM580A3-Intro-to-qCMB-2023/10_Alpine_HPC/02_scripts
-cd ../03_output/trimmed_fastq
+cd ../03_output/trimmed_reads
 ls
 ~~~
 {: .bash}
